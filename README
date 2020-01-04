@@ -1,3 +1,4 @@
-There are three computers with three local git users. They all use the same SSH key.
+There are three computers with three local git users. Their hostnames and git users match.
 - Alpha (Newest Macbook)
 - Beta (Older Macbook)
+- Gamma (CFSD Windows Machine)
