@@ -1,2 +1,3 @@
 There are three computers with three local git users. They all use the same SSH key.
 - Alpha (Newest Macbook)
+- Beta (Older Macbook)
