@@ -1,0 +1,30 @@
+Values from the RGB sensor & the sample color strip.
+
+Red: 0.162109375
+Green: 0.588623046875
+Blue: 0.249267578125
+Proximity: 255
+Red: 0.16162109375
+Green: 0.589111328125
+Blue: 0.2490234375
+Proximity: 255
+Red: 0.162109375
+Green: 0.58935546875
+Blue: 0.24853515625
+Proximity: 255
+Red: 0.16162109375
+Green: 0.58935546875
+Blue: 0.2490234375
+Proximity: 255
+Red: 0.166259765625
+Green: 0.585693359375
+Blue: 0.248046875
+Proximity: 207
+Red: 0.16259765625
+Green: 0.58935546875
+Blue: 0.248046875
+Proximity: 255
+Red: 0.162109375
+Green: 0.58935546875
+Blue: 0.248291015625
+Proximity: 255

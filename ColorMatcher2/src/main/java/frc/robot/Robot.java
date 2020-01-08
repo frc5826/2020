@@ -46,51 +46,34 @@ public class Robot extends TimedRobot {
   private final SpeedControllerGroup rightSpeedContollers = new SpeedControllerGroup(rightMotor1, rightMotor2);
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSpeedContollers, rightSpeedContollers);
 
-  
+  private int i = 0;
+
   @Override
   public void robotInit() {
-    m_colorMatcher.addColorMatch(kBlueTarget);
-    m_colorMatcher.addColorMatch(kGreenTarget);
-    m_colorMatcher.addColorMatch(kRedTarget);
-    m_colorMatcher.addColorMatch(kYellowTarget);    
+
   }
 
   @Override
   public void teleopPeriodic() {
+    m_robotDrive.arcadeDrive(0, 0);
     // Drive with arcade drive.
     // That means that the Y axis drives forward
     // and backward, and the X turns left and right.
     //m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
 
     Color detectedColor = m_colorSensor.getColor();
-
-    String colorString;
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
-
-    if (match.color == kBlueTarget) {
-      colorString = "Blue";
-      m_robotDrive.arcadeDrive(-0.5,0.5);
-    } else if (match.color == kRedTarget) {
-      colorString = "Red";
-      m_robotDrive.arcadeDrive(0.5,-0.5);
-    } else if (match.color == kGreenTarget) {
-      colorString = "Green";
-      m_robotDrive.arcadeDrive(0,0);
-    } else if (match.color == kYellowTarget) {
-      colorString = "Yellow";
-      m_robotDrive.arcadeDrive(0,0.5);
-    } else {
-      colorString = "Unknown";
-    }
-    //System.out.println("The color is "+ colorString);
-
-
     
-    SmartDashboard.putNumber("Red", detectedColor.red);
-    SmartDashboard.putNumber("Green", detectedColor.green);
-    SmartDashboard.putNumber("Blue", detectedColor.blue);
-    SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", colorString);
+    double red = detectedColor.red;
+    double green = detectedColor.green;
+    double blue = detectedColor.blue;
+
+    //Only print on 150 iterations so the logs don't get bloated
+    if(i++ % 150 == 0){
+      System.out.println("Red: " + red);
+      System.out.println("Green: " + green);
+      System.out.println("Blue: " + blue);
+      System.out.println("Proximity: " + m_colorSensor.getProximity());
+    }
 
   }
 }
