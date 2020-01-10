@@ -7,13 +7,8 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-//import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.kauailabs.navx.frc.AHRS;
 
 
 
@@ -23,37 +18,37 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
  * Runs the motors with arcade steering.
  */
 public class GyroTurn {
-    int P, I, D = 1;
+    int P = 1;
+    int I = 68;
+    int D = 0;
     int integral, previous_error, setpoint = 0;
-    ADXRS450_Gyro gyro;
     DifferentialDrive robotDrive;
+    AHRS gyro;
     private double rcw;
 
 
-    public GyroTurn(ADXRS450_Gyro gyro, DifferentialDrive robotDrive){
+    public GyroTurn(final AHRS gyro, final DifferentialDrive robotDrive) {
         this.gyro = gyro;
         this.robotDrive = robotDrive;
     }
 
-    public void setSetpoint(int setpoint)
-    {
+    public void setSetpoint(final int setpoint) {
         this.setpoint = setpoint;
     }
 
-    public void PID(){
-        double error = setpoint - gyro.getAngle(); // Error = Target - Actual
-        this.integral += (error*.02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
-        double derivative = (error - this.previous_error) / .02;
+    public void PID() {
+        final double error = setpoint - gyro.getAngle(); // Error = Target - Actual
+        this.integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal
+                                        // IterativeRobot)
+        final double derivative = (error - this.previous_error) / .02;
         this.rcw = P*error + I*this.integral + D*derivative;
     }
 
     public void execute()
     {
         PID();
-        System.out.println("rcw-" + rcw);
-        System.out.println("angle-" + gyro.getAngle());
-        rcw = Math.min(.5, rcw);
-        rcw = Math.max(-.5, rcw);
+       // System.out.println("rcw - " + rcw);
+       // System.out.println("angle - " + gyro.getAngle());
 
         robotDrive.arcadeDrive(0, rcw);
     }
