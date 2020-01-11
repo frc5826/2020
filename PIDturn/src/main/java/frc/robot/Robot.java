@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 
 
@@ -39,9 +42,12 @@ public class Robot extends TimedRobot {
 
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSpeedContollers, rightSpeedContollers);
   private final Joystick m_stick = new Joystick(0);
+  Compressor compressor = new Compressor(11);
+  PowerDistributionPanel PDP = new PowerDistributionPanel(10);
   private double throttle = 0;
-
-  private final int angle = 90;
+  private final LimeLight limelight = new LimeLight(m_robotDrive);
+  private final Hwheel hwheel = new Hwheel(m_stick);
+  private final int angle = 180;
   private final AHRS gyro = new AHRS(SPI.Port.kMXP);
   
 
@@ -50,22 +56,25 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     turn.setSetpoint(angle);
+    limelight.start();
 
   }
   public void teleopPeriodic() {
-    throttle = ((m_stick.getThrottle() * -1)+1)/2;
+    throttle = ((m_stick.getThrottle() * -1)+1)/2; //throttle 0-1
+    //driving mode selector
     if (m_stick.getRawButton(1)){
       turn.execute();
     }
+    else if(m_stick.getRawButton(2)) {
+      limelight.target(); 
+    }
     else{
-      m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
+      m_robotDrive.arcadeDrive(m_stick.getY()*throttle, m_stick.getX()); 
+      hwheel.run();
     }
+    //ball shooter code
     if(m_stick.getRawButton(12)){
-      PWM5.set(m_stick.getThrottle());
-    }
-    else if(m_stick.getRawButton(11))  {
-      PWM5.set(throttle * -1);
-    } 
+      PWM5.set(throttle * -1);    }
    else{
      PWM5.set(0);
    }
