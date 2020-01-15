@@ -16,14 +16,12 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class.
@@ -57,7 +55,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     turn.setSetpoint(angle);
     limelight.start();
-
+  
   }
   public void teleopPeriodic() {
     throttle = ((m_stick.getThrottle() * -1)+1)/2; //throttle 0-1
@@ -66,7 +64,7 @@ public class Robot extends TimedRobot {
       turn.execute();
     }
     else if(m_stick.getRawButton(2)) {
-      limelight.target(); 
+      limelight.follow(); 
     }
     else{
       m_robotDrive.arcadeDrive(m_stick.getY()*throttle, m_stick.getX()); 

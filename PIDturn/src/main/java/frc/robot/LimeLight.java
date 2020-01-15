@@ -16,7 +16,7 @@ this.robotDrive=robotDrive;
          NetworkTableEntry pipeline = table.getEntry("pipeline");
          pipeline.forceSetDouble(7);
     }
-public void target(){
+public void follow(){
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ta = table.getEntry("ta");
     NetworkTableEntry tv = table.getEntry("tv");
@@ -32,5 +32,8 @@ public void target(){
     } else {
         robotDrive.arcadeDrive(0, 0);
     }
+}
+public void target(){
+    
 }
 }
