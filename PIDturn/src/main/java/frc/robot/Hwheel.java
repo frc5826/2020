@@ -10,6 +10,6 @@ Hwheel(Joystick joystick){
 this.joystick=joystick;
 }
 public void run(){
-    Hwheel.set(joystick.getX()*-1);
+    Hwheel.set(joystick.getX() * -1);
 }
 }

@@ -18,10 +18,11 @@ import com.kauailabs.navx.frc.AHRS;
  * Runs the motors with arcade steering.
  */
 public class GyroTurn {
-    double P = 1;
-    double I = 68;
-    double D = 0;
-    int integral, previous_error, setpoint = 0;
+    double P = 0.068;
+    double I = 0;
+    double D = 0.01;
+    double previous_error, integral = 0;
+    int setpoint = 0;
     DifferentialDrive robotDrive;
     AHRS gyro;
     private double rcw;
@@ -42,6 +43,7 @@ public class GyroTurn {
                                         // IterativeRobot)
         final double derivative = (error - this.previous_error) / .02;
         this.rcw = P*error + I*this.integral + D*derivative;
+        this.previous_error = error;
     }
 
     public void execute()
@@ -49,8 +51,6 @@ public class GyroTurn {
         PID();
        // System.out.println("rcw - " + rcw);
        // System.out.println("angle - " + gyro.getAngle());
-        rcw = Math.max(-.5, rcw);
-        rcw = Math.min(.5, rcw);
         robotDrive.arcadeDrive(0, rcw);
     }
 }

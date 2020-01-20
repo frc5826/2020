@@ -52,13 +52,13 @@ public class Robot extends TimedRobot {
   
   }
   public void teleopPeriodic() {
-    throttle = ((m_stick.getThrottle() * -1)+1)/2; //throttle 0-1
+    throttle = ((m_stick.getThrottle() * -1) +1) / 2; //throttle 0-1
     //driving mode selector
     if (m_stick.getRawButton(1)){
       turn.execute();
     } 
     else{
-      m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getZ()); 
+      m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getZ() * 0.75); 
       hwheel.run();
     }
     //ball shooter code
