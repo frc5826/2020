@@ -49,8 +49,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     turn.setSetpoint(angle);
-  
   }
+
   public void teleopPeriodic() {
     throttle = ((m_stick.getThrottle() * -1) +1) / 2; //throttle 0-1
     //driving mode selector
