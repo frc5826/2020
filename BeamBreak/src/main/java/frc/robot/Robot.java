@@ -20,7 +20,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * project.
  */
 public class Robot extends TimedRobot {
-  private BeamBreakSensor beamBreak = new BeamBreakSensor(5);
+  private BeamBreakSensor bottomBeamBreak = new BeamBreakSensor(5);
+  private BeamBreakSensor topBeamBreak = new BeamBreakSensor(6);
   private int count = 0;
   private final WPI_TalonSRX motor = new WPI_TalonSRX(1);
 
@@ -31,7 +32,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if(beamBreak.isBroken()) {
+    if(bottomBeamBreak.isBroken() && topBeamBreak.isNotBroken()) {
       motor.set(0.5);
     } else {
       motor.set(0);

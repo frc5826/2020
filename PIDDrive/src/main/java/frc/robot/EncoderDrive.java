@@ -27,12 +27,7 @@ public class EncoderDrive {
     }
 
     public void PID() {
-        final double error = setpoint - gyro.getAngle(); // Error = Target - Actual
-        this.integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal
-                                        // IterativeRobot)
-        final double derivative = (error - this.previous_error) / .02;
-        this.rcw = P*error + I*this.integral + D*derivative;
-        this.previous_error = error;
+        
     }
 
 }

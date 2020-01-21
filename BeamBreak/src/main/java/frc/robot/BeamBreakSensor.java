@@ -13,4 +13,8 @@ class BeamBreakSensor{
         return !pin.get();
     }
 
+    boolean isNotBroken(){
+        return pin.get();
+    }
+
 }

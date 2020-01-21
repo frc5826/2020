@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Encoder;
 
 
 
@@ -42,6 +43,10 @@ public class Robot extends TimedRobot {
   private final Hwheel hwheel = new Hwheel(m_stick);
   private final int angle = 90;
   private final AHRS gyro = new AHRS(SPI.Port.kMXP);
+
+  Encoder leftEncoder = new Encoder(0, 1);
+  Encoder rightEncoder = new Encoder(2, 3);
+  
   
 
   private final GyroTurn turn = new GyroTurn(gyro, m_robotDrive);
@@ -54,13 +59,14 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     throttle = ((m_stick.getThrottle() * -1) +1) / 2; //throttle 0-1
     //driving mode selector
+    System.out.println(leftEncoder.)
     if (m_stick.getRawButton(1)){
-      turn.execute();
     } 
     else{
       m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getZ() * 0.75); 
       hwheel.run();
     }
+    
     //ball shooter code
   }
 }
