@@ -27,8 +27,8 @@ public class Robot extends TimedRobot {
   //private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
   //private final Joystick m_stick = new Joystick(0);
   private int counter;
-  private LidarLitePWM lidar = new LidarLitePWM(new DigitalInput(4));
-
+  private LidarLitePWM lidarLeft = new LidarLitePWM(new DigitalInput(8));
+  private LidarLitePWM lidarRight= new LidarLitePWM(new DigitalInput(7));
   @Override
   public void robotInit() {
     counter = 0;
@@ -42,8 +42,10 @@ public class Robot extends TimedRobot {
     //m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
 
     if(counter == 100) {
-      double sonarValue = lidar.getDistance();
-      System.out.println("The distance (inches) is " + (sonarValue / 2.54));
+      double sonarValueLeft = lidarLeft.getDistance();
+      double sonarValueRight = lidarRight.getDistance();
+      System.out.println("The left distance (inches) is " + (sonarValueLeft / 2.54));
+      System.out.println("The right distance (inches) is" + (sonarValueRight / 2.54));
       counter = 0;
     } else {
       counter = counter + 1;
