@@ -42,6 +42,13 @@ public class Robot extends TimedRobot {
   private double throttle = 0;
   private final Hwheel hwheel = new Hwheel(m_stick);
 
+  double P = 0.068;
+  double I = 0;
+  double D = 0.01;
+  double setpoint = 92;
+  double previous_error, integral = 0;
+  private double rcw;
+
   Encoder leftEncoder = new Encoder(0, 1);
 	Encoder rightEncoder = new Encoder(2, 3);
 
@@ -66,30 +73,53 @@ public class Robot extends TimedRobot {
   }
 
   public void teleopPeriodic() {
-    throttle = ((m_stick.getThrottle() * -1) +1) / 2; //throttle 0-1
-    //driving mode selector
-    //  hwheel.run();
-    //ball shooter code
-    if (m_stick.getRawButtonPressed(7)){
-      resetEncoders();
-    }
     
-    double dif = (rightEncoder.get() - leftEncoder.get()) / 50.0;
-    
-    double turn = Math.min(dif, .5);
-    turn = Math.max(turn, -.5);
+    PID();
 
-    if(count++ % 100 == 0){
-      System.out.println(leftEncoder.get() + " , " + rightEncoder.get());
-      System.out.println("Dif: " + dif);
-      System.out.println("Turn: " + turn);
-    }
- 
-    m_robotDrive.curvatureDrive(m_stick.getY(), turn, false);
+    double drive = Math.min(rcw, .5);
+    drive = Math.max(drive, -.5);
+
+    m_robotDrive.curvatureDrive(drive, straighten(), false);
+    
+    System.out.println("Drive: " + drive);
+
+    // if(count++ % 10 == 0){
+    //   System.out.println(rightEncoder.get() + ", " + leftEncoder.get());
+    //   System.out.println("Previous Error: " + previous_error);
+    //   System.out.println("RCW: " + rcw);
+    // }
   }
 
   public void resetEncoders(){
     leftEncoder.reset();
     rightEncoder.reset();
   }
+
+  public double straighten(){
+    double dif = (rightEncoder.get() - leftEncoder.get()) / 50.0;
+    
+    double turn = Math.min(dif, .5);
+    turn = Math.max(turn, -.5);
+
+    return turn;
+  }
+
+  public void PID() {
+    final double cm_driven = (leftEncoder.get() / -4.56);
+    final double error = setpoint - cm_driven; // Error = Target - Actual
+    
+    if(count++ % 10 == 0){
+      System.out.println("leftEncoder: " + leftEncoder.get());
+      System.out.println("cm_driven: " + cm_driven);
+      System.out.println("setpoint: " + setpoint);
+      System.out.println("error: " + error);
+    }
+
+    this.integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal
+                                    // IterativeRobot)
+    final double derivative = (error - this.previous_error) / .02;
+    this.rcw = P*error + I*this.integral + D*derivative;
+    this.previous_error = error;
+  }
+
 }
