@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
   Encoder leftEncoder = new Encoder(0, 1);
 	Encoder rightEncoder = new Encoder(2, 3);
 
+  int count = 0;
 
 
   @Override
@@ -52,12 +53,43 @@ public class Robot extends TimedRobot {
 
   }
 
+  @Override
+  public void teleopInit() {
+    resetEncoders();
+    if(leftEncoder.get() < 10 && leftEncoder.get() > -10){
+      System.out.println("Encoders reset");
+    }
+    else {
+      System.out.println("ENCODERS NOT RESET");
+
+    }
+  }
+
   public void teleopPeriodic() {
     throttle = ((m_stick.getThrottle() * -1) +1) / 2; //throttle 0-1
     //driving mode selector
-      m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getZ() * 0.75); 
-      hwheel.run();
+    //  hwheel.run();
     //ball shooter code
-    System.out.println(leftEncoder.get() + " , " + rightEncoder.get());
+    if (m_stick.getRawButtonPressed(7)){
+      resetEncoders();
+    }
+    
+    double dif = (rightEncoder.get() - leftEncoder.get()) / 50.0;
+    
+    double turn = Math.min(dif, .5);
+    turn = Math.max(turn, -.5);
+
+    if(count++ % 100 == 0){
+      System.out.println(leftEncoder.get() + " , " + rightEncoder.get());
+      System.out.println("Dif: " + dif);
+      System.out.println("Turn: " + turn);
+    }
+ 
+    m_robotDrive.curvatureDrive(m_stick.getY(), turn, false);
+  }
+
+  public void resetEncoders(){
+    leftEncoder.reset();
+    rightEncoder.reset();
   }
 }
