@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+
 public class LimelightSubsystem extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
@@ -30,18 +31,32 @@ public class LimelightSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public double getTargetDistance(){
+
+    NetworkTableEntry tz = table.getEntry("tz");
+    double z = tz.getDouble(0.0);
+    
+    return z;
+  }
+
+  public double getTargetAngleOffset(){
+
+    NetworkTableEntry tx = table.getEntry("tx");
+    double x = tx.getDouble(0.0);
+
+    return x;
+    
+  }
+
   public boolean isCentered() {
 
     NetworkTableEntry tx = table.getEntry("tx");
     double x = tx.getDouble(0.0);
 
-    if (x < 1) {
+    if (java.lang.Math.abs(x) < 1) {
       return true;
     } else {
       return false;
     }
-    
-      
-    
   }
 }
