@@ -31,6 +31,23 @@ public class LimelightSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  public double getTargetDistance(){
+
+    NetworkTableEntry tz = table.getEntry("tz");
+    double z = tz.getDouble(0.0);
+    
+    return z;
+  }
+
+  public double getTargetAngleOffset(){
+
+    NetworkTableEntry tx = table.getEntry("tx");
+    double x = tx.getDouble(0.0);
+
+    return x;
+    
+  }
+
   public boolean isCentered() {
 
     NetworkTableEntry tx = table.getEntry("tx");
