@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSpeedContollers, rightSpeedContollers);
   private final Joystick m_stick = new Joystick(0);
   private double throttle = 0;
-  private final Hwheel hwheel = new Hwheel(m_stick);
+  private final Hwheel hwheel = new Hwheel(m_stick, throttle);
   private final int angle = 90;
   private final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
@@ -59,12 +59,16 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     throttle = ((m_stick.getThrottle() * -1) +1) / 2; //throttle 0-1
     //driving mode selector
-    System.out.println(leftEncoder.)
+    System.out.println(leftEncoder.get());
     if (m_stick.getRawButton(1)){
+      turn.execute();
     } 
     else{
-      m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getZ() * 0.75); 
+      m_robotDrive.arcadeDrive(m_stick.getY() * throttle , m_stick.getZ() * 0.75 * throttle); 
       hwheel.run();
+    }
+    if (m_stick.getRawButtonPressed(7)){
+      turn.setSetpoint(angle);
     }
     
     //ball shooter code

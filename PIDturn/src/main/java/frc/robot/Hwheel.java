@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Hwheel{
 private final WPI_TalonSRX Hwheel = new WPI_TalonSRX(5);
 Joystick joystick;
-Hwheel(Joystick joystick){
+Hwheel(Joystick joystick, double throttle){
 this.joystick=joystick;
 }
 public void run(){
