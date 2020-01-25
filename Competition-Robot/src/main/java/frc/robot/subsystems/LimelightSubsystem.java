@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+
 public class LimelightSubsystem extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
@@ -35,13 +36,10 @@ public class LimelightSubsystem extends SubsystemBase {
     NetworkTableEntry tx = table.getEntry("tx");
     double x = tx.getDouble(0.0);
 
-    if (x < 1) {
+    if (java.lang.Math.abs(x) < 1) {
       return true;
     } else {
       return false;
     }
-    
-      
-    
   }
 }
