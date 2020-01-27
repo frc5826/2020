@@ -74,15 +74,13 @@ public class Robot extends TimedRobot {
 
   public void teleopPeriodic() {
     
-    PID();
+    // // PID();
 
-    double drive = Math.min(rcw, .5);
-    drive = Math.max(drive, -.5);
+    // double drive = Math.min(rcw, .5);
+    // drive = Math.max(drive, -.5);
 
-    m_robotDrive.curvatureDrive(drive, straighten(), false);
+    m_robotDrive.curvatureDrive(m_stick.getY(), 0, false);
     
-    System.out.println("Drive: " + drive);
-
     // if(count++ % 10 == 0){
     //   System.out.println(rightEncoder.get() + ", " + leftEncoder.get());
     //   System.out.println("Previous Error: " + previous_error);
@@ -104,22 +102,22 @@ public class Robot extends TimedRobot {
     return turn;
   }
 
-  public void PID() {
-    final double cm_driven = (leftEncoder.get() / -4.56);
-    final double error = setpoint - cm_driven; // Error = Target - Actual
+  // public void PID() {
+  //   final double cm_driven = (leftEncoder.get() / -4.56);
+  //   final double error = setpoint - cm_driven; // Error = Target - Actual
     
-    if(count++ % 10 == 0){
-      System.out.println("leftEncoder: " + leftEncoder.get());
-      System.out.println("cm_driven: " + cm_driven);
-      System.out.println("setpoint: " + setpoint);
-      System.out.println("error: " + error);
-    }
+  //   if(count++ % 10 == 0){
+  //     System.out.println("leftEncoder: " + leftEncoder.get());
+  //     System.out.println("cm_driven: " + cm_driven);
+  //     System.out.println("setpoint: " + setpoint);
+  //     System.out.println("error: " + error);
+  //   }
 
-    this.integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal
-                                    // IterativeRobot)
-    final double derivative = (error - this.previous_error) / .02;
-    this.rcw = P*error + I*this.integral + D*derivative;
-    this.previous_error = error;
-  }
+  //   this.integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal
+  //                                   // IterativeRobot)
+  //   final double derivative = (error - this.previous_error) / .02;
+  //   this.rcw = P*error + I*this.integral + D*derivative;
+  //   this.previous_error = error;
+  // }
 
 }

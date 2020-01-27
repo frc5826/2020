@@ -50,7 +50,16 @@ public class LimelightSubsystem extends SubsystemBase {
 
 
   public boolean isTargetVisable(){
-    return false;
+    NetworkTableEntry ta = table.getEntry("ta");
+    double a = ta.getDouble(0.0);
+
+    if (java.lang.Math.abs(a) < 0.05) {
+      return false;
+    } else {
+      return true;
+    }
+
+
   }
 
   public boolean isCentered() {
