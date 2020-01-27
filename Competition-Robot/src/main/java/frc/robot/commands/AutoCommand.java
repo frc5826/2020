@@ -4,6 +4,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 
@@ -36,13 +37,24 @@ public class AutoCommand extends CommandBase {
     @Override
     public void initialize() {
 
+        robotDrive = new DifferentialDrive(driveSubsystem.getLeftSpeedController(), driveSubsystem.getRightSpeedController());
+        gyro = Constants.gyro;
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        PID();
-        robotDrive.arcadeDrive(0, rcw);
+        if(limelightSubsystem.isTargetVisable()){
+            setpoint = (int)limelightSubsystem.getTargetAngleOffset();
+
+            PID();
+            robotDrive.arcadeDrive(0, rcw);
+        }
+        else{
+            robotDrive.arcadeDrive(0, 0.2);
+        }
+        
     }
 
     // Called once the command ends or is interrupted.
