@@ -15,7 +15,7 @@ import frc.robot.Constants;
 /**
  * An example command that uses an example subsystem.
  */
-public class JoystickDrive extends CommandBase {
+public class JoystickDriveCommand extends CommandBase {
   
   private final DriveSubsystem m_subsystem;
   private DifferentialDrive robotDrive;
@@ -26,7 +26,7 @@ public class JoystickDrive extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public JoystickDrive(DriveSubsystem subsystem) {
+  public JoystickDriveCommand(DriveSubsystem subsystem) {
     m_subsystem = subsystem;
     addRequirements(subsystem);
   }
