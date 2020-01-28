@@ -22,5 +22,19 @@ public final class Constants {
     public static Joystick joystick = new Joystick(0);
     public static AHRS gyro = new AHRS(SPI.Port.kMXP);
 
+    //Limit the value to the abs(max)
+    public static double limitSpeed(double value, double max){
+        double normedMax = Math.abs(max);
+        double output = value;
+        output = Math.min(output, normedMax);
+        output = Math.max(output, -1 * normedMax);
+
+        if(output != value){
+            System.out.println("Speed limited: " + output);
+        }
+
+        return output;
+    }
+
 
 }

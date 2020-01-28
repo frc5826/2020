@@ -21,7 +21,7 @@ public class AutoCommand extends CommandBase {
     double I = 0;
     double D = 0.01;
     double previous_error, integral = 0;
-    int setpoint = 0;
+    int setpoint = Integer.MAX_VALUE;
     DifferentialDrive robotDrive;
     AHRS gyro;
 
@@ -46,13 +46,16 @@ public class AutoCommand extends CommandBase {
     @Override
     public void execute() {
         if(limelightSubsystem.isTargetVisable()){
-            setpoint = (int)limelightSubsystem.getTargetAngleOffset();
-
+            setpoint = (int)(Constants.gyro.getAngle() + limelightSubsystem.getTargetAngleOffset());
+            // System.out.println("setpoint " + setpoint);
+            // System.out.println("rcw " + rcw);
+            // System.out.println("Angle " + Constants.gyro.getAngle());
+            // System.out.println("offset " + limelightSubsystem.getTargetAngleOffset());
             PID();
-            robotDrive.arcadeDrive(0, rcw);
+            robotDrive.arcadeDrive(0, Constants.limitSpeed(rcw, .7));
         }
         else{
-            robotDrive.arcadeDrive(0, 0.2);
+            robotDrive.arcadeDrive(0, 0.6);
         }
         
     }
@@ -65,7 +68,7 @@ public class AutoCommand extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return !Constants.joystick.getRawButton(1);
     }
 
     public void PID() {
