@@ -17,9 +17,9 @@ public class AutoCommand extends CommandBase {
     private final LimelightSubsystem limelightSubsystem;
     private double rcw;
 
-    double P = 0.030;
-    double I = 0.003;
-    double D = 0.002;
+    double P = 0.050;
+    double I = 0.0025;
+    double D = 0.0065;
     double previous_error, integral = 0;
     int setpoint = Integer.MAX_VALUE;
     DifferentialDrive robotDrive;
@@ -49,16 +49,14 @@ public class AutoCommand extends CommandBase {
         if(limelightSubsystem.isTargetVisable()){
             setpoint = (int)(Constants.gyro.getAngle() + limelightSubsystem.getTargetAngleOffset());
         //    System.out.println("setpoint " + setpoint);
-        //   System.out.println("rcw " + rcw);
+           System.out.println("rcw " + rcw);
         //   System.out.println("Angle " + Constants.gyro.getAngle());
         //   System.out.println("offset " + limelightSubsystem.getTargetAngleOffset());
-            System.out.println("error " + error);
+        //   System.out.println("error " + error);
             PID();
-            //if(Math.abs(error) > 1.5){
-                robotDrive.arcadeDrive(0, rcw);
-            //} else {
-              //  robotDrive.arcadeDrive(0, 0);
-           // }
+            robotDrive.arcadeDrive(0, rcw);
+            driveSubsystem.hwheel.set(Constants.joystick.getX() * -1);
+           
         }
         else{
             robotDrive.arcadeDrive(0, 0.6);
