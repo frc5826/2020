@@ -17,13 +17,14 @@ public class AutoCommand extends CommandBase {
     private final LimelightSubsystem limelightSubsystem;
     private double rcw;
 
-    double P = 0.068;
+    double P = 0.030;
     double I = 0;
-    double D = 0.01;
+    double D = 0.005;
     double previous_error, integral = 0;
     int setpoint = Integer.MAX_VALUE;
     DifferentialDrive robotDrive;
     AHRS gyro;
+    double error;
 
     public AutoCommand(DriveSubsystem driveSubsystem, LimelightSubsystem limelightSubsystem){
         
@@ -47,12 +48,17 @@ public class AutoCommand extends CommandBase {
     public void execute() {
         if(limelightSubsystem.isTargetVisable()){
             setpoint = (int)(Constants.gyro.getAngle() + limelightSubsystem.getTargetAngleOffset());
-            // System.out.println("setpoint " + setpoint);
-            // System.out.println("rcw " + rcw);
-            // System.out.println("Angle " + Constants.gyro.getAngle());
-            // System.out.println("offset " + limelightSubsystem.getTargetAngleOffset());
+        //    System.out.println("setpoint " + setpoint);
+        //   System.out.println("rcw " + rcw);
+        //   System.out.println("Angle " + Constants.gyro.getAngle());
+        //   System.out.println("offset " + limelightSubsystem.getTargetAngleOffset());
+            System.out.println("error" + error);
             PID();
-            robotDrive.arcadeDrive(0, Constants.limitSpeed(rcw, .7));
+            //if(Math.abs(error) > 1.5){
+                robotDrive.arcadeDrive(0, rcw);
+            //} else {
+              //  robotDrive.arcadeDrive(0, 0);
+           // }
         }
         else{
             robotDrive.arcadeDrive(0, 0.6);
@@ -72,7 +78,7 @@ public class AutoCommand extends CommandBase {
     }
 
     public void PID() {
-        final double error = setpoint - gyro.getAngle(); // Error = Target - Actual
+        error = setpoint - gyro.getAngle(); // Error = Target - Actual
         this.integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal
                                         // IterativeRobot)
         final double derivative = (error - this.previous_error) / .02;
