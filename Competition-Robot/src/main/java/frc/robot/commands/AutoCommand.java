@@ -18,8 +18,8 @@ public class AutoCommand extends CommandBase {
     private double rcw;
 
     double P = 0.030;
-    double I = 0;
-    double D = 0.005;
+    double I = 0.003;
+    double D = 0.002;
     double previous_error, integral = 0;
     int setpoint = Integer.MAX_VALUE;
     DifferentialDrive robotDrive;
@@ -52,7 +52,7 @@ public class AutoCommand extends CommandBase {
         //   System.out.println("rcw " + rcw);
         //   System.out.println("Angle " + Constants.gyro.getAngle());
         //   System.out.println("offset " + limelightSubsystem.getTargetAngleOffset());
-            System.out.println("error" + error);
+            System.out.println("error " + error);
             PID();
             //if(Math.abs(error) > 1.5){
                 robotDrive.arcadeDrive(0, rcw);
