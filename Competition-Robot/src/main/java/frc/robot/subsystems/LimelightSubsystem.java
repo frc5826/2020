@@ -47,7 +47,14 @@ public class LimelightSubsystem extends SubsystemBase {
     return x;
     
   }
+  public double getHeightAngle(){
+      
+    NetworkTableEntry ty = table.getEntry("ty");
+    double y = ty.getDouble(0.0);
 
+    return y;
+
+  }
 
   public boolean isTargetVisable(){
     NetworkTableEntry ta = table.getEntry("ta");

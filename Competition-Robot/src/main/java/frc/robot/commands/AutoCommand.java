@@ -16,6 +16,7 @@ public class AutoCommand extends CommandBase {
     private final DriveSubsystem driveSubsystem;
     private final LimelightSubsystem limelightSubsystem;
     private double rcw;
+    private double driveY;
 
     double P = 0.050;
     double I = 0.0025;
@@ -54,7 +55,8 @@ public class AutoCommand extends CommandBase {
         //   System.out.println("offset " + limelightSubsystem.getTargetAngleOffset());
         //   System.out.println("error " + error);
             PID();
-            robotDrive.arcadeDrive(0, rcw);
+            TargetDistance();
+            robotDrive.arcadeDrive(driveY, rcw);
             driveSubsystem.hwheel.set(Constants.joystick.getX() * -1);
            
         }
@@ -84,4 +86,15 @@ public class AutoCommand extends CommandBase {
         this.previous_error = error;
     }
 
+    public void TargetDistance() {
+        if(limelightSubsystem.getHeightAngle() > -1.8) {
+            driveY = .5;
+        }
+        else if(limelightSubsystem.getHeightAngle() < -2.2) {
+            driveY = -.5;
+        } else {
+            driveY = 0;
+        }
+        
+    }
 }
