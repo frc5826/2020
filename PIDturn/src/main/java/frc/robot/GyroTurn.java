@@ -10,12 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.kauailabs.navx.frc.AHRS;
 
-
-
-
 /**
- * This is a demo program showing the use of the DifferentialDrive class.
- * Runs the motors with arcade steering.
+ * This is a demo program showing the use of the DifferentialDrive class. Runs
+ * the motors with arcade steering.
  */
 public class GyroTurn {
     double P = 0.068;
@@ -26,7 +23,6 @@ public class GyroTurn {
     DifferentialDrive robotDrive;
     AHRS gyro;
     private double rcw;
-
 
     public GyroTurn(final AHRS gyro, final DifferentialDrive robotDrive) {
         this.gyro = gyro;
@@ -42,15 +38,14 @@ public class GyroTurn {
         this.integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal
                                         // IterativeRobot)
         final double derivative = (error - this.previous_error) / .02;
-        this.rcw = P*error + I*this.integral + D*derivative;
+        this.rcw = P * error + I * this.integral + D * derivative;
         this.previous_error = error;
     }
 
-    public void execute()
-    {
+    public void execute() {
         PID();
-       // System.out.println("rcw - " + rcw);
-       // System.out.println("angle - " + gyro.getAngle());
+        // System.out.println("rcw - " + rcw);
+        // System.out.println("angle - " + gyro.getAngle());
         robotDrive.arcadeDrive(0, rcw);
     }
 }

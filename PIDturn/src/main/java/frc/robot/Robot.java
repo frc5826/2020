@@ -20,19 +20,20 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Encoder;
 
-
-
-
 /**
- * This is a demo program showing the use of the DifferentialDrive class.
- * Runs the motors with arcade steering.
+ * This is a demo program showing the use of the DifferentialDrive class. Runs
+ * the motors with arcade steering.
  */
 public class Robot extends TimedRobot {
-  private final WPI_VictorSPX leftMotor1 = new WPI_VictorSPX(4);
-  private final WPI_VictorSPX leftMotor2 = new WPI_VictorSPX(3);
+  //private final WPI_VictorSPX leftMotor1 = new WPI_VictorSPX(4);
+  //private final WPI_VictorSPX leftMotor2 = new WPI_VictorSPX(3);
+  private final WPI_TalonSRX leftMotor1 = new WPI_TalonSRX(4);
+  private final WPI_TalonSRX leftMotor2 = new WPI_TalonSRX(3);
 
-  private final WPI_VictorSPX rightMotor1 = new WPI_VictorSPX(2);
-  private final WPI_VictorSPX rightMotor2 = new WPI_VictorSPX(1);
+  //private final WPI_VictorSPX rightMotor1 = new WPI_VictorSPX(2);
+  //private final WPI_VictorSPX rightMotor2 = new WPI_VictorSPX(1);
+  private final WPI_TalonSRX rightMotor1 = new WPI_TalonSRX(2);
+  private final WPI_TalonSRX rightMotor2 = new WPI_TalonSRX(1);
 
   private final SpeedControllerGroup leftSpeedContollers = new SpeedControllerGroup(leftMotor1, leftMotor2);
   private final SpeedControllerGroup rightSpeedContollers = new SpeedControllerGroup(rightMotor1, rightMotor2);
@@ -46,8 +47,6 @@ public class Robot extends TimedRobot {
 
   Encoder leftEncoder = new Encoder(0, 1);
   Encoder rightEncoder = new Encoder(2, 3);
-  
-  
 
   private final GyroTurn turn = new GyroTurn(gyro, m_robotDrive);
 
@@ -57,20 +56,19 @@ public class Robot extends TimedRobot {
   }
 
   public void teleopPeriodic() {
-    throttle = ((m_stick.getThrottle() * -1) +1) / 2; //throttle 0-1
-    //driving mode selector
-    System.out.println(leftEncoder.get());
-    if (m_stick.getRawButton(1)){
+    throttle = ((m_stick.getThrottle() * -1) + 1) / 2; // throttle 0-1
+    // driving mode selector
+    //System.out.println(leftEncoder.get());
+    if (m_stick.getRawButton(1)) {
       turn.execute();
-    } 
-    else{
-      m_robotDrive.arcadeDrive(m_stick.getY() * throttle , m_stick.getZ() * 0.75 * throttle); 
+    } else {
+      m_robotDrive.arcadeDrive(m_stick.getY() * throttle * -1, m_stick.getZ() * 0.75 * throttle);
       hwheel.run();
     }
-    if (m_stick.getRawButtonPressed(7)){
+    if (m_stick.getRawButtonPressed(7)) {
       turn.setSetpoint(angle);
     }
-    
-    //ball shooter code
+
+    // ball shooter code
   }
 }

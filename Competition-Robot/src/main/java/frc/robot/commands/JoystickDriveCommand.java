@@ -40,8 +40,8 @@ public class JoystickDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    robotDrive.arcadeDrive(Constants.joystick.getY(), Constants.joystick.getZ() * .75);
-    m_subsystem.hwheel.set(Constants.joystick.getX()*-1);
+    robotDrive.arcadeDrive(Constants.joystick.getY() * -1, Constants.joystick.getZ() * .75);
+    m_subsystem.hwheel.set(Constants.joystick.getX());
   }
 
   // Called once the command ends or is interrupted.
