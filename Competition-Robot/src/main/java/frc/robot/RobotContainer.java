@@ -10,9 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutoCommand;
+import frc.robot.commands.Fondler3000Command;
 import frc.robot.commands.JoystickDriveCommand;
+import frc.robot.commands.TrolleyCommand;
 import frc.robot.commands.TurnCommand;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Fondler3000Subsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -30,6 +34,8 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final JoystickDriveCommand joystickDrive = new JoystickDriveCommand(driveSubsystem);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+  private final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
+  private final Fondler3000Subsystem fondler3000Subsystem = new Fondler3000Subsystem();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -50,6 +56,10 @@ public class RobotContainer {
     spin.whenPressed(new TurnCommand(driveSubsystem, 90));
     JoystickButton center = new JoystickButton(Constants.joystick, 1);
     center.whenPressed(new AutoCommand(driveSubsystem, limelightSubsystem));
+    JoystickButton climb = new JoystickButton(Constants.joystick, 8);
+    climb.whenPressed(new TrolleyCommand(climbSubsystem));
+    JoystickButton shoot = new JoystickButton(Constants.joystick, 2);
+    shoot.whenPressed(new Fondler3000Command(fondler3000Subsystem));
   }
 
 
@@ -70,3 +80,5 @@ public class RobotContainer {
     return driveSubsystem;
   }
 }
+
+//yeehaw my beets

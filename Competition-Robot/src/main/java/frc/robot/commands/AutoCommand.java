@@ -5,6 +5,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 
@@ -76,6 +77,7 @@ public class AutoCommand extends CommandBase {
     public boolean isFinished() {
         return !Constants.joystick.getRawButton(1);
     }
+
 
     public void PID() {
         error = setpoint - gyro.getAngle(); // Error = Target - Actual
