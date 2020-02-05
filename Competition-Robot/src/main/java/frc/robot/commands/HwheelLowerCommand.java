@@ -7,40 +7,39 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.Fondler3000Subsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class Fondler3000Command extends CommandBase {
+public class HwheelLowerCommand extends CommandBase {
   
-  private final Fondler3000Subsystem fondler3000Subsystem;
-  
+  private final DriveSubsystem driveSubsystem;
+  private boolean finished = false;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Fondler3000Command(Fondler3000Subsystem subsystem) {
-    fondler3000Subsystem = subsystem;
-    addRequirements(fondler3000Subsystem);
+  public HwheelLowerCommand(DriveSubsystem subsystem) {
+    driveSubsystem = subsystem;
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    fondler3000Subsystem.shooterMotor.set(Constants.joystick.getThrottle());
-    System.out.println("current" + fondler3000Subsystem.shooterMotor.getSupplyCurrent());
+        driveSubsystem.wheelift.set(DoubleSolenoid.Value.kForward);
+        finished = true;
   }
 
   // Called once the command ends or is interrupted.
@@ -51,6 +50,6 @@ public class Fondler3000Command extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

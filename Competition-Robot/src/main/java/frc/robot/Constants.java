@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.SPI;
 public final class Constants {
     public static Joystick joystick = new Joystick(0);
     public static AHRS gyro = new AHRS(SPI.Port.kMXP);
+    //public static double throttle = ((joystick.getThrottle() + 1) / 2);
 
     //Limit the value to the abs(max)
     public static double limitSpeed(double value, double max){

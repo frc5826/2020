@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Compressor;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -25,6 +27,8 @@ public class DriveSubsystem extends SubsystemBase {
     public final SpeedControllerGroup rightSpeedControllers = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
     public final WPI_TalonSRX hwheel = new WPI_TalonSRX(7);
+    public final Compressor kerplunk = new Compressor(11); 
+    public final DoubleSolenoid wheelift = new DoubleSolenoid(0, 1);
 
   public DriveSubsystem() {
 

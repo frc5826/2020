@@ -7,10 +7,11 @@
 
 package frc.robot;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 /**
@@ -22,21 +23,22 @@ import edu.wpi.first.wpilibj.TimedRobot;
  */
 public class Robot extends TimedRobot {
   HashMap<Integer, DoubleSolenoid> solenoids = new HashMap<>();
-
+  List<DoubleSolenoid.Value> values = Arrays.asList(DoubleSolenoid.Value.kForward, DoubleSolenoid.Value.kOff, DoubleSolenoid.Value.kReverse);
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
 
    int iterations = 0;
-   int currentSolenoid = 0;
-  
+   int currentValue = 0;  
+
+
   @Override
   public void robotInit() {
     solenoids.put(0, new DoubleSolenoid(11, 1,0));
-    solenoids.put(2, new DoubleSolenoid(11, 3,2));
-    solenoids.put(1, new DoubleSolenoid(11, 4,5));
-    solenoids.put(3, new DoubleSolenoid(11, 6,7));
+    // solenoids.put(2, new DoubleSolenoid(11, 3,2));
+    // solenoids.put(1, new DoubleSolenoid(11, 4,5));
+    // solenoids.put(3, new DoubleSolenoid(11, 6,7));
   }
 
   /**
@@ -91,13 +93,26 @@ public class Robot extends TimedRobot {
     // if(preSolenoid != null){
     //   preSolenoid.set(DoubleSolenoid.Value.kReverse);
     // }
+    
+    if(iterations++ % 150 == 0){
+      DoubleSolenoid.Value value = values.get(currentValue++ % values.size());
+      System.out.println(value);
+      solenoids.values().forEach(s -> s.set(value));
+    }
 
-    if(iterations++ % 50 == 0){
-      solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kForward));
-    }
-    else if(iterations % 25 == 0){
-      solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kReverse));
-    }
+
+    // if(iterations++ % 250 == 0){
+    //   System.out.println("Forward");
+    //   solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kForward));
+    // }
+    // else if(iterations % 120 == 0){
+    //   System.out.println("Reverse");
+    //   solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kReverse));
+    // }
+    // else if(iterations % 60 == 0){
+    //   System.out.println("Off");
+    //   solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kOff));
+    // }
 
 
   }
