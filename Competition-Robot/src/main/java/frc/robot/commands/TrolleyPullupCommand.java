@@ -1,22 +1,15 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands;
 
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class HwheelRaiseCommand extends CommandBase {
+public class TrolleyPullupCommand extends CommandBase {
   
-  private final DriveSubsystem driveSubsystem;
+  private final ClimbSubsystem climbSubsystem;
   private boolean finished = false;
 
   /**
@@ -24,8 +17,8 @@ public class HwheelRaiseCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public HwheelRaiseCommand(DriveSubsystem subsystem) {
-    driveSubsystem = subsystem;
+  public TrolleyPullupCommand(ClimbSubsystem subsystem) {
+    climbSubsystem = subsystem;
     addRequirements(subsystem);
   }
 
@@ -38,7 +31,8 @@ public class HwheelRaiseCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        driveSubsystem.wheelift.set(DoubleSolenoid.Value.kReverse);
+        climbSubsystem.rightPiston.set(DoubleSolenoid.Value.kReverse);
+        climbSubsystem.leftPiston.set(DoubleSolenoid.Value.kReverse);
         finished = true;
   }
 

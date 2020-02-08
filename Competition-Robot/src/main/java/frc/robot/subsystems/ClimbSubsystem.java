@@ -2,17 +2,15 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 public class ClimbSubsystem extends SubsystemBase {
-    //private final WPI_VictorSPX leftMotor1 = new WPI_VictorSPX(4);
-    //private final WPI_VictorSPX leftMotor2 = new WPI_VictorSPX(3);
-
-    //private final WPI_VictorSPX rightMotor1 = new WPI_VictorSPX(2);
-    //private final WPI_VictorSPX rightMotor2 = new WPI_VictorSPX(1);
 
     public final WPI_TalonSRX trolleyMotor = new WPI_TalonSRX(6);
+    public final DoubleSolenoid leftPiston = new DoubleSolenoid(2,3);
+    public final DoubleSolenoid rightPiston = new DoubleSolenoid(4,5);
+    public final DoubleSolenoid liftPiston = new DoubleSolenoid(6,7);
 
   public ClimbSubsystem() {
 

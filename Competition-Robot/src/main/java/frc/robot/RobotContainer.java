@@ -15,6 +15,7 @@ import frc.robot.commands.HwheelLowerCommand;
 import frc.robot.commands.HwheelRaiseCommand;
 import frc.robot.commands.JoystickDriveCommand;
 import frc.robot.commands.TrolleyCommand;
+import frc.robot.commands.TrolleyRaiseCommand;
 import frc.robot.commands.TurnCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -59,13 +60,15 @@ public class RobotContainer {
     JoystickButton center = new JoystickButton(Constants.joystick, 1);
     center.whenPressed(new AutoCommand(driveSubsystem, limelightSubsystem));
     JoystickButton climb = new JoystickButton(Constants.joystick, 8);
-    climb.whenPressed(new TrolleyCommand(climbSubsystem));
+    climb.whenPressed(new TrolleyCommand(climbSubsystem, driveSubsystem));
     JoystickButton shoot = new JoystickButton(Constants.joystick, 2);
     shoot.whenPressed(new Fondler3000Command(fondler3000Subsystem));
     JoystickButton raise = new JoystickButton(Constants.joystick, 10);
     raise.whenPressed(new HwheelRaiseCommand(driveSubsystem));
     JoystickButton lower = new JoystickButton(Constants.joystick, 9);
-    lower.whenPressed(new HwheelRaiseCommand(driveSubsystem));
+    lower.whenPressed(new HwheelLowerCommand(driveSubsystem));
+    JoystickButton trolleyRaise = new JoystickButton(Constants.joystick, 11);
+    trolleyRaise.whenPressed(new TrolleyRaiseCommand(climbSubsystem));
   }
 
 
@@ -87,4 +90,5 @@ public class RobotContainer {
   }
 }
 
-//yeehaw my beets
+
+

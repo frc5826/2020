@@ -113,6 +113,9 @@ public class Robot extends TimedRobot {
     //   System.out.println("Off");
     //   solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kOff));
     // }
+    // if(goingToTurnEvil){
+    //  don't
+    //}
 
 
   }
