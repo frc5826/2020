@@ -17,6 +17,7 @@ import frc.robot.commands.JoystickDriveCommand;
 import frc.robot.commands.TrolleyCommand;
 import frc.robot.commands.TrolleyRaiseCommand;
 import frc.robot.commands.TurnCommand;
+import frc.robot.subsystems.BallIntakeSubsystem;
 import frc.robot.subsystems.BallLifterSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -40,6 +41,7 @@ public class RobotContainer {
   private final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
   private final Fondler3000Subsystem fondler3000Subsystem = new Fondler3000Subsystem();
   private final BallLifterSubsystem ballLifterSubsystem = new BallLifterSubsystem();
+  private final BallIntakeSubsystem ballIntakeSubsystem = new BallIntakeSubsystem();
 
   private final JoystickDriveCommand joystickDrive = new JoystickDriveCommand(driveSubsystem);
   /**
@@ -48,6 +50,9 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    ballIntakeSubsystem.register();
+    ballLifterSubsystem.register();
   }
 
   /**
