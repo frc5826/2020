@@ -8,10 +8,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class BallLifterSubsystem extends SubsystemBase {
     private DigitalInput beamBreakSensor = new DigitalInput(5);
+    public final WPI_TalonSRX lifterMotor= new WPI_TalonSRX(7);
 
 
     public BallLifterSubsystem() {
@@ -23,10 +25,10 @@ public class BallLifterSubsystem extends SubsystemBase {
         // This method will be called once per scheduler run
 
         if(isBroken()){
-            //motor.set(1);
-            System.out.println("Beam is broken");
+            lifterMotor.set(0.5);
+            //System.out.println("Beam is broken");
           } else {
-            //motor.set(0);
+            lifterMotor.set(0);
             //System.out.println("Beam is NOT broken");
           }
     }

@@ -48,7 +48,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    ballLifterSubsystem.register();  // register so that periodic is called
   }
 
   /**
