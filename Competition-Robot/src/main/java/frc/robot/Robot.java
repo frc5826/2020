@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.commands.JoystickDriveCommand;
+import frc.robot.subsystems.BallLifterSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -94,6 +95,7 @@ public class Robot extends TimedRobot {
     if (auto_command != null) {
       auto_command.cancel();
     }
+
   }
 
   /**

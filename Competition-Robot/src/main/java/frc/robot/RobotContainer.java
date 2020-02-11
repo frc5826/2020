@@ -17,6 +17,7 @@ import frc.robot.commands.JoystickDriveCommand;
 import frc.robot.commands.TrolleyCommand;
 import frc.robot.commands.TrolleyRaiseCommand;
 import frc.robot.commands.TurnCommand;
+import frc.robot.subsystems.BallLifterSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Fondler3000Subsystem;
@@ -38,6 +39,7 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
   private final Fondler3000Subsystem fondler3000Subsystem = new Fondler3000Subsystem();
+  private final BallLifterSubsystem ballLifterSubsystem = new BallLifterSubsystem();
 
   private final JoystickDriveCommand joystickDrive = new JoystickDriveCommand(driveSubsystem);
   /**
@@ -46,6 +48,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    ballLifterSubsystem.register();  // register so that periodic is called
   }
 
   /**
