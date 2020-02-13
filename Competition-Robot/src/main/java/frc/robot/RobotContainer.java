@@ -40,6 +40,8 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
   private final Fondler3000Subsystem fondler3000Subsystem = new Fondler3000Subsystem();
+  private final BallLifterSubsystem ballLifterSubsystem = new BallLifterSubsystem();
+  private final BallIntakeSubsystem ballIntakeSubsystem = new BallIntakeSubsystem();
 
   private final JoystickDriveCommand joystickDrive = new JoystickDriveCommand(driveSubsystem);
   /**
@@ -48,6 +50,9 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    ballIntakeSubsystem.register();
+    ballLifterSubsystem.register();
   }
 
   /**
