@@ -1,0 +1,30 @@
+Drive Functions-That are pretty darn epic.
+Buttons:
+
+(X) F/B: Drive 
+(Z) Twist: Turn 
+(Y) L/R: Hwheel
+Throttle: SPEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED Modifier
+(Dpad)L/R: Climber Movement
+
+1. Trigger: Shoot hold
+2. Aim hold
+3. Extend Climber 
+4.
+5.  Raise Climber Assembly 
+6.  Intake On/Off
+
+7: Backward Conveyor
+8: Forward Conveyor
+9. H-Wheel Pneumatic Down 
+10. H-Wheel Pneumatic Up
+11. //Safety for Climber Pneumatics and Movement//
+12. 
+
+
+Climber Safety and Climber Movement Override on Driverstation
+
+Conveyor7
+Shoot8
+Intake9
+
