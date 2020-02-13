@@ -24,8 +24,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-  private final WPI_TalonSRX motor = new WPI_TalonSRX(9);
+  private final WPI_VictorSPX motorIntake = new WPI_VictorSPX(3);
+  private final WPI_VictorSPX motorConveyor = new WPI_VictorSPX(2);
+  private final WPI_VictorSPX motorShooter = new WPI_VictorSPX(1);
   private final Joystick m_stick = new Joystick(0);
+
 
   /**
    * This function is run when the robot is first started up and should be
@@ -33,7 +36,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    
+
   }
 
   /**
@@ -77,10 +80,33 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    double value = m_stick.getY();
+    double value = (m_stick.getThrottle() - 1) / 2;
+
     System.out.println(value);
-    motor.set(value);
+    motorShooter.set(value);
+    if (m_stick.getRawButton(12)) {
+      motorIntake.set(1);
+    } else {
+      motorIntake.set(0.0);
+    }
+
+    if (m_stick.getRawButton(8)) {
+      motorConveyor.set(0.75);
+    }
+
+    else if (m_stick.getRawButton(7)) {
+      motorConveyor.set(-0.75);
+    }
+
+    else {
+      motorConveyor.set(0.0);
+    }
+
+
   }
+
+  
+
 
   /**
    * This function is called periodically during test mode.

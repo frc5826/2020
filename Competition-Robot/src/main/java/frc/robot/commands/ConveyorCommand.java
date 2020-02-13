@@ -15,7 +15,7 @@ import frc.robot.Constants;
 /**
  * An example command that uses an example subsystem.
  */
-public class Fondler3000Command extends CommandBase {
+public class ConveyorCommand extends CommandBase {
   
   private final Fondler3000Subsystem fondler3000Subsystem;
   
@@ -25,7 +25,7 @@ public class Fondler3000Command extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Fondler3000Command(Fondler3000Subsystem subsystem) {
+  public ConveyorCommand(Fondler3000Subsystem subsystem) {
     fondler3000Subsystem = subsystem;
     addRequirements(fondler3000Subsystem);
   }
@@ -33,24 +33,32 @@ public class Fondler3000Command extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
-    fondler3000Subsystem.shooterMotor.set(Constants.joystick.getThrottle());
-    System.out.println("current" + fondler3000Subsystem.shooterMotor.getSupplyCurrent());
+    if(Constants.xbox.getYButton()){
+        fondler3000Subsystem.conveyorMotor.set(1);
+
+    } else if(Constants.xbox.getBButton()) {
+        fondler3000Subsystem.conveyorMotor.set(-1);
+
+    } else {
+        fondler3000Subsystem.conveyorMotor.set(0);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    fondler3000Subsystem.conveyorMotor.set(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Constants.joystick.getRawButton(7);
   }
 }

@@ -7,6 +7,7 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -20,6 +21,7 @@ import edu.wpi.first.wpilibj.SPI;
  */
 public final class Constants {
     public static Joystick joystick = new Joystick(0);
+    public static XboxController xbox = new XboxController(1);
     public static AHRS gyro = new AHRS(SPI.Port.kMXP);
     //public static double throttle = ((joystick.getThrottle() + 1) / 2);
 

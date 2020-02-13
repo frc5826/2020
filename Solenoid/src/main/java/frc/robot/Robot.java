@@ -13,6 +13,9 @@ import java.util.List;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,7 +26,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
  */
 public class Robot extends TimedRobot {
   HashMap<Integer, DoubleSolenoid> solenoids = new HashMap<>();
-  List<DoubleSolenoid.Value> values = Arrays.asList(DoubleSolenoid.Value.kForward, DoubleSolenoid.Value.kOff, DoubleSolenoid.Value.kReverse);
+  XboxController xbox = new XboxController(1);
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -36,9 +39,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     solenoids.put(0, new DoubleSolenoid(11, 1,0));
-    // solenoids.put(2, new DoubleSolenoid(11, 3,2));
-    // solenoids.put(1, new DoubleSolenoid(11, 4,5));
-    // solenoids.put(3, new DoubleSolenoid(11, 6,7));
+    solenoids.put(1, new DoubleSolenoid(11, 2,3));
+    solenoids.put(2, new DoubleSolenoid(11, 4,5));
+    solenoids.put(3, new DoubleSolenoid(11, 6,7));
+
   }
 
   /**
@@ -82,42 +86,25 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    // iterations++;
-    // currentSolenoid = (iterations / 50) % 4;
-    // DoubleSolenoid solenoid = solenoids.get(currentSolenoid);
-    // DoubleSolenoid preSolenoid = solenoids.get((currentSolenoid + 3) % 4);
-
-    // if(solenoid != null){
-    //   solenoid.set(DoubleSolenoid.Value.kForward);
-    // }
-    // if(preSolenoid != null){
-    //   preSolenoid.set(DoubleSolenoid.Value.kReverse);
-    // }
-    
-    if(iterations++ % 150 == 0){
-      DoubleSolenoid.Value value = values.get(currentValue++ % values.size());
-      System.out.println(value);
-      solenoids.values().forEach(s -> s.set(value));
+    DoubleSolenoid solenoid = null;
+    if(xbox.getYButton()) {
+      solenoid = solenoids.get(0);
+    } else if (xbox.getBButton()) {
+      solenoid = solenoids.get(1);
+    } else if (xbox.getXButton()) {
+      solenoid = solenoids.get(2);
+    } else if (xbox.getAButton()) {
+      solenoid = solenoids.get(3);
     }
 
+    if(xbox.getBumper(Hand.kRight)) {
+      System.out.println(solenoid + " forward");
+      solenoid.set(Value.kForward);
+    } else if (xbox.getBumper(Hand.kLeft)) {
+      solenoid.set(Value.kReverse);
+      System.out.println(solenoid + " reverse");
 
-    // if(iterations++ % 250 == 0){
-    //   System.out.println("Forward");
-    //   solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kForward));
-    // }
-    // else if(iterations % 120 == 0){
-    //   System.out.println("Reverse");
-    //   solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kReverse));
-    // }
-    // else if(iterations % 60 == 0){
-    //   System.out.println("Off");
-    //   solenoids.values().forEach(s -> s.set(DoubleSolenoid.Value.kOff));
-    // }
-    // if(goingToTurnEvil){
-    //  don't
-    //}
-
-
+    }
   }
 
   /**

@@ -37,7 +37,10 @@ public class Robot extends TimedRobot {
   private final AHRS gyro = new AHRS(SPI.Port.kMXP);
   private final WPI_TalonSRX trolley = new WPI_TalonSRX(6);
   private double speed;
-  private final DoubleSolenoid piston = new DoubleSolenoid(11,2,3);
+  private final DoubleSolenoid pistonR = new DoubleSolenoid(11,4,5);
+  private final DoubleSolenoid pistonL = new DoubleSolenoid(11,6,7);
+  
+  
 
   int i = 0;
 
@@ -47,10 +50,12 @@ public class Robot extends TimedRobot {
 
   public void teleopPeriodic() {
     if(m_stick.getRawButton(8)) {
-      piston.set(DoubleSolenoid.Value.kForward);
+      pistonR.set(DoubleSolenoid.Value.kForward);
+      pistonL.set(DoubleSolenoid.Value.kForward);
     }
     else{
-      piston.set(DoubleSolenoid.Value.kReverse);
+      pistonR.set(DoubleSolenoid.Value.kReverse);
+      pistonL.set(DoubleSolenoid.Value.kReverse);
     }
 
     robotDrive.arcadeDrive(m_stick.getY() , m_stick.getZ() * 0.75);

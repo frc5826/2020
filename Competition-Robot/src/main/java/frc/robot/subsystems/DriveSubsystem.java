@@ -20,15 +20,14 @@ public class DriveSubsystem extends SubsystemBase {
 
     private final WPI_TalonSRX leftMotor1 = new WPI_TalonSRX(4);
     private final WPI_TalonSRX leftMotor2 = new WPI_TalonSRX(3);
-    private final WPI_TalonSRX rightMotor1 = new WPI_TalonSRX(2);
-    private final WPI_TalonSRX rightMotor2 = new WPI_TalonSRX(1);
+    private final WPI_TalonSRX rightMotor1 = new WPI_TalonSRX(1);
+    private final WPI_TalonSRX rightMotor2 = new WPI_TalonSRX(2);
 
     public final SpeedControllerGroup leftSpeedControllers = new SpeedControllerGroup(leftMotor1, leftMotor2);
     public final SpeedControllerGroup rightSpeedControllers = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
-    public final WPI_TalonSRX hwheel = new WPI_TalonSRX(7);
-    public final Compressor kerplunk = new Compressor(11); 
-    public final DoubleSolenoid wheelift = new DoubleSolenoid(0, 1);
+    public final WPI_TalonSRX hwheel = new WPI_TalonSRX(5);
+    public final DoubleSolenoid wheelift = new DoubleSolenoid(11, 2, 3);
 
   public DriveSubsystem() {
 

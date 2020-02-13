@@ -6,13 +6,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
 public class Fondler3000Subsystem extends SubsystemBase {
-    //private final WPI_VictorSPX leftMotor1 = new WPI_VictorSPX(4);
-    //private final WPI_VictorSPX leftMotor2 = new WPI_VictorSPX(3);
 
-    //private final WPI_VictorSPX rightMotor1 = new WPI_VictorSPX(2);
-    //private final WPI_VictorSPX rightMotor2 = new WPI_VictorSPX(1);
-
-    public final WPI_TalonSRX shooterMotor= new WPI_TalonSRX(8);
+  public final WPI_TalonSRX shooterMotor= new WPI_TalonSRX(8);
+  public final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(9);
+  public final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(7);
 
   public Fondler3000Subsystem() {
 

@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class ClimbSubsystem extends SubsystemBase {
 
     public final WPI_TalonSRX trolleyMotor = new WPI_TalonSRX(6);
-    public final DoubleSolenoid leftPiston = new DoubleSolenoid(2,3);
-    public final DoubleSolenoid rightPiston = new DoubleSolenoid(4,5);
-    public final DoubleSolenoid liftPiston = new DoubleSolenoid(6,7);
+    public final DoubleSolenoid leftPiston = new DoubleSolenoid(11, 6, 7);
+    public final DoubleSolenoid rightPiston = new DoubleSolenoid(11, 4, 5);
+    public final DoubleSolenoid liftPiston = new DoubleSolenoid(11, 0, 1);
 
   public ClimbSubsystem() {
 
