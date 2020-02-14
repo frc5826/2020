@@ -64,11 +64,12 @@ public class Fondler3000Subsystem extends SubsystemBase {
     shoot(-1);
   }
 
+  //Min 0.0, Max = 1.0
   public void shoot(double percent){
     if(percent > 0){
-      if(percent > 100){
-        System.out.println("Shoot was supplied with a percent larger than 100% (" + percent + "). Setting to 100%.");
-        percent = 100;
+      if(percent > 1.0){
+        System.out.println("Shoot was supplied with a percent larger than 1.0 (100%) (" + percent + "). Setting to 1.0.");
+        percent = 1.0;
       }
       shooterMotor.set(ControlMode.Current, percent * kMaxAmps);
     }
