@@ -39,8 +39,8 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
-    fondler3000Subsystem.shooterMotor.set(((Constants.joystick.getThrottle() - 1) / 2));
-    System.out.println("current" + fondler3000Subsystem.shooterMotor.getSupplyCurrent());
+    fondler3000Subsystem.shoot((Constants.joystick.getThrottle() - 1) / 2);
+    System.out.println("current" + fondler3000Subsystem.getShooterCurrent());
   }
 
   // Called once the command ends or is interrupted.
