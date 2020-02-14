@@ -14,13 +14,32 @@ Throttle: SPEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED Modifier
 5.  Raise Climber Assembly 
 6.  Intake On/Off
 
-7: Backward Conveyor
-8: Forward Conveyor
+7: Manual Conveyor
+8: Auto Conveyor
 9. H-Wheel Pneumatic Down 
 10. H-Wheel Pneumatic Up
 11. //Safety for Climber Pneumatics and Movement//
 12. 
 
+Xbox Controller Overrides
+L Throttle:
+R Throttle:
+
+L Trigger:
+R Trigger:
+
+Y Button: Conveyor Forward
+B Button: Conveyor Backward
+X Button:
+A Button:
+
+R Joystick:
+L Joystick:
+
+Back:
+Start:
+
+D-Pad:
 
 Climber Safety and Climber Movement Override on Driverstation
 
