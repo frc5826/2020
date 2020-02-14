@@ -14,7 +14,7 @@ public class Fondler3000Subsystem extends SubsystemBase {
   public final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(7);
 
   public Fondler3000Subsystem() {
-
+    shooterMotor.setSafetyEnabled(false);
   }
 
   @Override
