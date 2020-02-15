@@ -9,6 +9,7 @@ package frc.robot;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -86,24 +87,27 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    DoubleSolenoid solenoid = null;
+    List<DoubleSolenoid> solonoids = new LinkedList<>();
     if(xbox.getYButton()) {
-      solenoid = solenoids.get(0);
+      solonoids.add(solenoids.get(0));
     } else if (xbox.getBButton()) {
-      solenoid = solenoids.get(1);
+      solonoids.add(solenoids.get(1));
     } else if (xbox.getXButton()) {
-      solenoid = solenoids.get(2);
-    } else if (xbox.getAButton()) {
-      solenoid = solenoids.get(3);
+      solonoids.add(solenoids.get(2));
+      solonoids.add(solenoids.get(3));
     }
 
     if(xbox.getBumper(Hand.kRight)) {
-      System.out.println(solenoid + " forward");
-      solenoid.set(Value.kForward);
-    } else if (xbox.getBumper(Hand.kLeft)) {
-      solenoid.set(Value.kReverse);
-      System.out.println(solenoid + " reverse");
+      for(DoubleSolenoid ds : solonoids){
+        ds.set(Value.kForward);
+        System.out.println(ds + " forward");
+      }
 
+    } else if (xbox.getBumper(Hand.kLeft)) {
+      for(DoubleSolenoid ds : solonoids){
+        ds.set(Value.kReverse);
+        System.out.println(ds + " reverse");
+      }
     }
   }
 

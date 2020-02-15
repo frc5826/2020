@@ -15,10 +15,15 @@ public class Fondler3000Subsystem extends SubsystemBase {
   public final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(7);
 
   private static final int kMaxAmps = 40;
+  private int brokenIterationCount = 0;
 
   public Fondler3000Subsystem() {
+    shooterMotor.setInverted(true);
+    intakeMotor.setInverted(true);
+    conveyorMotor.setInverted(true);
+
     //TODO - Is it better to add explicit limits or to disable completely
-    shooterMotor.enableCurrentLimit(true);
+    shooterMotor.enableCurrentLimit(false);
 
     /*
     CIM specs
@@ -43,21 +48,22 @@ public class Fondler3000Subsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(isNotBroken()){
-      conveyorMotor.set(-0.5);
+    if(isBroken()){
+      conveyorMotor.set(0.5);
       //System.out.println("Beam is broken");
-    } else {
+    } else if(brokenIterationCount++ > 35){
       conveyorMotor.set(0);
       //System.out.println("Beam is NOT broken");
+      brokenIterationCount = 0;
     }
   }
 
   boolean isBroken(){
-    return beamBreakSensor.get();
+    return !beamBreakSensor.get();
   }
 
   boolean isNotBroken(){
-    return !beamBreakSensor.get();
+    return beamBreakSensor.get();
   }
 
   public void stopShooter(){
@@ -67,14 +73,11 @@ public class Fondler3000Subsystem extends SubsystemBase {
   //Min 0.0, Max = 1.0
   public void shoot(double percent){
     if(percent > 0){
-      if(percent > 1.0){
-        System.out.println("Shoot was supplied with a percent larger than 1.0 (100%) (" + percent + "). Setting to 1.0.");
-        percent = 1.0;
-      }
-      shooterMotor.set(ControlMode.Current, percent * kMaxAmps);
+      System.out.println("percent " + percent);
+      shooterMotor.set(percent);
     }
     else {
-      shooterMotor.set(ControlMode.Current, 0);
+      shooterMotor.set(0);
     }
   }
 

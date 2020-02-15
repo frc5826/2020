@@ -18,6 +18,7 @@ import frc.robot.commands.TrolleyCommand;
 import frc.robot.commands.TrolleyRaiseCommand;
 import frc.robot.commands.TurnCommand;
 import frc.robot.commands.ConveyorCommand;
+import frc.robot.commands.DriveCommandGroup;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.BallIntakeSubsystem;
 import frc.robot.subsystems.BallLifterSubsystem;
@@ -64,22 +65,27 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton spin = new JoystickButton(Constants.joystick, 7);
-    spin.whenPressed(new TurnCommand(driveSubsystem, 90));
     JoystickButton center = new JoystickButton(Constants.joystick, 2);
     center.whenPressed(new AutoCommand(driveSubsystem, limelightSubsystem));
+    
     JoystickButton climb = new JoystickButton(Constants.joystick, 8);
     climb.whenPressed(new TrolleyCommand(climbSubsystem, driveSubsystem));
+    
     JoystickButton intake = new JoystickButton(Constants.joystick, 4);
-    intake.whenPressed(new IntakeCommand(fondler3000Subsystem));
+    intake.whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(fondler3000Subsystem)));
+    
     JoystickButton manualConveyor = new JoystickButton(Constants.joystick, 7);
-    manualConveyor.whenPressed(new ConveyorCommand(fondler3000Subsystem));
+    manualConveyor.whenPressed(new DriveCommandGroup(driveSubsystem, new ConveyorCommand(fondler3000Subsystem)));
+    
     JoystickButton shoot = new JoystickButton(Constants.joystick, 1);
-    shoot.whenPressed(new ShooterCommand(fondler3000Subsystem));
-    JoystickButton raise = new JoystickButton(Constants.joystick, 10);
-    raise.whenPressed(new HwheelRaiseCommand(driveSubsystem));
-    JoystickButton lower = new JoystickButton(Constants.joystick, 9);
-    lower.whenPressed(new HwheelLowerCommand(driveSubsystem));
+    shoot.whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(fondler3000Subsystem)));
+    
+    //JoystickButton raise = new JoystickButton(Constants.joystick, 10);
+    //raise.whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(driveSubsystem)));
+    
+    //JoystickButton lower = new JoystickButton(Constants.joystick, 9);
+    //lower.whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(driveSubsystem)));
+    
     JoystickButton trolleyRaise = new JoystickButton(Constants.joystick, 11);
     trolleyRaise.whenPressed(new TrolleyRaiseCommand(climbSubsystem));
   }
@@ -101,6 +107,7 @@ public class RobotContainer {
   public Subsystem getDriveSubsystem(){
     return driveSubsystem;
   }
+
 }
 
 
