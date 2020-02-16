@@ -51,6 +51,6 @@ public class IntakeCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Constants.joystick.getRawButton(6);
+    return !Constants.joystick.getRawButton(4);
   }
 }

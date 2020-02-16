@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Compressor;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -30,7 +29,7 @@ public class DriveSubsystem extends SubsystemBase {
     public final DoubleSolenoid wheelift = new DoubleSolenoid(11, 2, 3);
 
   public DriveSubsystem() {
-
+    hwheel.setInverted(true);
   }
 
   @Override

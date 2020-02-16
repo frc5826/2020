@@ -75,7 +75,7 @@ public class AutoCommand extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return !Constants.joystick.getRawButton(1);
+        return !Constants.joystick.getRawButton(2);
     }
 
 
@@ -90,10 +90,10 @@ public class AutoCommand extends CommandBase {
 
     public void TargetDistance() {
         if(limelightSubsystem.getHeightAngle() > -1.8) {
-            driveY = .5;
+            driveY = -.5;
         }
         else if(limelightSubsystem.getHeightAngle() < -2.2) {
-            driveY = -.5;
+            driveY = .5;
         } else {
             driveY = 0;
         }

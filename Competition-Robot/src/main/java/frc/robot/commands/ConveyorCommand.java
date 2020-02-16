@@ -39,15 +39,7 @@ public class ConveyorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
-    if(Constants.xbox.getYButton()){
-        fondler3000Subsystem.conveyorMotor.set(1);
-
-    } else if(Constants.xbox.getBButton()) {
-        fondler3000Subsystem.conveyorMotor.set(-1);
-
-    } else {
-        fondler3000Subsystem.conveyorMotor.set(0);
-    }
+    fondler3000Subsystem.conveyorMotor.set(.5);
   }
 
   // Called once the command ends or is interrupted.
@@ -59,6 +51,6 @@ public class ConveyorCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Constants.joystick.getRawButton(7);
+    return !Constants.joystick.getRawButton(7);
   }
 }
