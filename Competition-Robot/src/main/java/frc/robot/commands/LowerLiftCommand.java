@@ -1,14 +1,14 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ClimbSubsystem;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class TrolleyPullupCommand extends CommandBase {
-  
+public class LowerLiftCommand extends CommandBase {
+
   private final ClimbSubsystem climbSubsystem;
   private boolean finished = false;
 
@@ -17,7 +17,7 @@ public class TrolleyPullupCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TrolleyPullupCommand(ClimbSubsystem subsystem) {
+  public LowerLiftCommand(ClimbSubsystem subsystem) {
     climbSubsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -31,8 +31,7 @@ public class TrolleyPullupCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        climbSubsystem.rightPiston.set(DoubleSolenoid.Value.kReverse);
-        climbSubsystem.leftPiston.set(DoubleSolenoid.Value.kReverse);
+        climbSubsystem.liftPiston.set(DoubleSolenoid.Value.kForward);
         finished = true;
   }
 

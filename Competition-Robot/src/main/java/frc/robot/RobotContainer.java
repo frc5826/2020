@@ -53,8 +53,10 @@ public class RobotContainer {
     bShoot.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
     bRaiseHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
     bLowerHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));
-    bRaiseLift.createButton().whenPressed(new TrolleyRaiseCommand(climbSubsystem));
-    bLowerLift.createButton().whenPressed(new TrolleyPullupCommand(climbSubsystem));
+    bRaiseLift.createButton().whenPressed(new RaiseLiftCommand(climbSubsystem));
+    bLowerLift.createButton().whenPressed(new LowerLiftCommand(climbSubsystem));
+    bRaiseTrolley.createButton().whenPressed(new RaiseTrolleyCommand(climbSubsystem));
+    bLowerTrolley.createButton().whenPressed(new LowerTrolleyCommand(climbSubsystem));
   }
 
 

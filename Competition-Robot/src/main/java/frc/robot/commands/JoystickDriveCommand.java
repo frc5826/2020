@@ -20,8 +20,6 @@ import frc.robot.subsystems.HWheelSubsystem;
 public class JoystickDriveCommand extends CommandBase {
 
   private final DriveSubsystem driveSubsystem;
-  private DifferentialDrive robotDrive;
-
 
   /**
    * Creates a new ExampleCommand.
@@ -36,14 +34,13 @@ public class JoystickDriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    robotDrive = new DifferentialDrive(driveSubsystem.getLeftSpeedController(), driveSubsystem.getRightSpeedController());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    robotDrive.arcadeDrive(Constants.joystick.getY() * -1, Constants.joystick.getZ());
-    driveSubsystem.hwheel.set(Constants.joystick.getX());
+    driveSubsystem.getDiffDrive().arcadeDrive(Constants.joystick.getY() * -1, Constants.joystick.getZ());
+    driveSubsystem.getHWheel().set(Constants.joystick.getX());
   }
 
   // Called once the command ends or is interrupted.
