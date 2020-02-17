@@ -33,7 +33,6 @@ public class TrolleyRaiseCommand extends CommandBase {
   public void execute() {
         climbSubsystem.liftPiston.set(DoubleSolenoid.Value.kForward);
         climbSubsystem.rightPiston.set(DoubleSolenoid.Value.kForward);
-        climbSubsystem.leftPiston.set(DoubleSolenoid.Value.kForward);
         finished = true;
   }
 

@@ -10,13 +10,14 @@ package frc.robot.commands;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.HWheelSubsystem;
 
 /**
  * An example command that uses an example subsystem.
  */
 public class HwheelRaiseCommand extends CommandBase {
   
-  private final DriveSubsystem driveSubsystem;
+  private final HWheelSubsystem hWheelSubsystem;
   private boolean finished = false;
 
   /**
@@ -24,8 +25,8 @@ public class HwheelRaiseCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public HwheelRaiseCommand(DriveSubsystem subsystem) {
-    driveSubsystem = subsystem;
+  public HwheelRaiseCommand(HWheelSubsystem subsystem) {
+    hWheelSubsystem = subsystem;
     addRequirements(subsystem);
   }
 
@@ -38,7 +39,7 @@ public class HwheelRaiseCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        driveSubsystem.wheelift.set(DoubleSolenoid.Value.kReverse);
+        hWheelSubsystem.wheelift.set(DoubleSolenoid.Value.kReverse);
         finished = true;
   }
 

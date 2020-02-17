@@ -16,6 +16,7 @@ import com.kauailabs.navx.frc.AHRS;
  * This is a demo program showing the use of the DifferentialDrive class.
  * Runs the motors with arcade steering.
  */
+@Deprecated
 public class GyroTurn {
     double P = 0.068;
     double I = 0;

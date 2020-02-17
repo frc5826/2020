@@ -16,6 +16,7 @@ import frc.robot.Constants;
 /**
  * An example command that uses an example subsystem.
  */
+@Deprecated
 public class TurnCommand extends CommandBase {
       
   private final DriveSubsystem m_subsystem;

@@ -15,22 +15,19 @@ import frc.robot.Constants;
 /**
  * An example command that uses an example subsystem.
  */
-public class TrolleyCommand extends CommandBase {
+public class TrolleyBalanceCommand extends CommandBase {
   
   private final ClimbSubsystem climbSubsystem;
-  private final DriveSubsystem driveSubsystem;
-  
+
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TrolleyCommand(ClimbSubsystem subsystem, DriveSubsystem subsystem2) {
+  public TrolleyBalanceCommand(ClimbSubsystem subsystem) {
     climbSubsystem = subsystem;
-    driveSubsystem = subsystem2;
     addRequirements(subsystem);
-    addRequirements(subsystem2);
   }
 
   // Called when the command is initially scheduled.
@@ -42,7 +39,7 @@ public class TrolleyCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climbSubsystem.trolleyMotor.set(Constants.joystick.getX() * -1);
+    climbSubsystem.trolleyMotor.set(Constants.joystick.getX());
   }
 
   // Called once the command ends or is interrupted.
