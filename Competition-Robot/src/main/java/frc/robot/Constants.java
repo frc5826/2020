@@ -26,15 +26,15 @@ public final class Constants {
     public static AHRS gyro = new AHRS(SPI.Port.kMXP);
 
     //Buttons
-    public static final int bShoot = 1;
-    public static final int bTarget = 2;
-    public static final int bIntake = 4;
-    public static final int bRaiseLift = 5;
-    public static final int bLowerLift = 6;
-    public static final int bConveyor = 7;
-    public static final int bBalance = 8;
-    public static final int bLowerHWheel = 9;
-    public static final int bRaiseHWheel = 10;
+    public static final ButtonTuple bShoot = new ButtonTuple(joystick, 1);
+    public static final ButtonTuple bTarget = new ButtonTuple(joystick, 2);
+    public static final ButtonTuple bIntake = new ButtonTuple(joystick, 4);
+    public static final ButtonTuple bRaiseLift = new ButtonTuple(joystick, 5);
+    public static final ButtonTuple bLowerLift = new ButtonTuple(joystick, 6);
+    public static final ButtonTuple bConveyor = new ButtonTuple(joystick, 7);
+    public static final ButtonTuple bBalance = new ButtonTuple(joystick, 8);
+    public static final ButtonTuple bLowerHWheel = new ButtonTuple(joystick, 9);
+    public static final ButtonTuple bRaiseHWheel = new ButtonTuple(joystick, 10);
 
     //Speed Controllers
     public static final int scDriveRight1 = 1;

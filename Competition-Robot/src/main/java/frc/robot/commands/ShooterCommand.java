@@ -53,6 +53,6 @@ public class ShooterCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Constants.joystick.getRawButton(bShoot);
+    return !bShoot.isPressed();
   }
 }

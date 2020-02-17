@@ -13,7 +13,6 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import static frc.robot.Constants.*;
 
 /**
@@ -47,32 +46,15 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton center = new JoystickButton(Constants.joystick, bTarget);
-    center.whenPressed(new TargetCommand(driveSubsystem, limelightSubsystem));
-    
-    JoystickButton balance = new JoystickButton(Constants.joystick, bBalance);
-    balance.whenPressed(new TrolleyBalanceCommand(climbSubsystem));
-    
-    JoystickButton intake = new JoystickButton(Constants.joystick, bIntake);
-    intake.whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
-    
-    JoystickButton manualConveyor = new JoystickButton(Constants.joystick, bConveyor);
-    manualConveyor.whenPressed(new DriveCommandGroup(driveSubsystem, new ConveyorCommand(shooterSubsystem)));
-    
-    JoystickButton shoot = new JoystickButton(Constants.joystick, bShoot);
-    shoot.whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
-    
-    JoystickButton raise = new JoystickButton(Constants.joystick, bRaiseHWheel);
-    raise.whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
-    
-    JoystickButton lower = new JoystickButton(Constants.joystick, bLowerHWheel);
-    lower.whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));
-    
-    JoystickButton trolleyRaise = new JoystickButton(Constants.joystick, bRaiseLift);
-    trolleyRaise.whenPressed(new TrolleyRaiseCommand(climbSubsystem));
-
-    JoystickButton trolleyLower = new JoystickButton(Constants.joystick, bLowerLift);
-    trolleyRaise.whenPressed(new TrolleyPullupCommand(climbSubsystem));
+    bTarget.createButton().whenPressed(new TargetCommand(driveSubsystem, limelightSubsystem));
+    bBalance.createButton().whenPressed(new TrolleyBalanceCommand(climbSubsystem));
+    bIntake.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
+    bConveyor.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ConveyorCommand(shooterSubsystem)));
+    bShoot.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
+    bRaiseHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
+    bLowerHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));
+    bRaiseLift.createButton().whenPressed(new TrolleyRaiseCommand(climbSubsystem));
+    bLowerLift.createButton().whenPressed(new TrolleyPullupCommand(climbSubsystem));
   }
 
 

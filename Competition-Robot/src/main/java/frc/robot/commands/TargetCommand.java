@@ -92,7 +92,7 @@ public class TargetCommand extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return !Constants.joystick.getRawButton(bTarget);
+        return !bTarget.isPressed();
     }
 
 }

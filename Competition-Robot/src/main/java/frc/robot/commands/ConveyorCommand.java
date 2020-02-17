@@ -51,6 +51,6 @@ public class ConveyorCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Constants.joystick.getRawButton(bConveyor);
+    return !bConveyor.isPressed();
   }
 }

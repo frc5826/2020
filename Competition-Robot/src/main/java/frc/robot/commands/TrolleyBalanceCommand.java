@@ -8,9 +8,8 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import static frc.robot.Constants.*;
 
 /**
  * An example command that uses an example subsystem.
@@ -39,17 +38,20 @@ public class TrolleyBalanceCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climbSubsystem.trolleyMotor.set(Constants.joystick.getX());
+    //TODO - Is this pitch, yaw or roll
+    float speed = gyro.getPitch() / 20;
+    climbSubsystem.trolleyMotor.set(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    climbSubsystem.trolleyMotor.set(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return !bBalance.isPressed();
   }
 }
