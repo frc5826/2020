@@ -20,7 +20,6 @@ import frc.robot.Constants;
 public class TurnCommand extends CommandBase {
       
   private final DriveSubsystem m_subsystem;
-  private DifferentialDrive robotDrive;
   private GyroTurn gyroTurn;
   private int setpoint;
 
@@ -38,8 +37,7 @@ public class TurnCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    robotDrive = new DifferentialDrive(m_subsystem.getLeftSpeedController(), m_subsystem.getRightSpeedController());
-    gyroTurn = new GyroTurn(Constants.gyro, robotDrive);
+    gyroTurn = new GyroTurn(Constants.gyro, m_subsystem.getDiffDrive());
     gyroTurn.setSetpoint((int) (setpoint + Constants.gyro.getAngle()) % 360);
   }
 

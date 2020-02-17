@@ -22,8 +22,6 @@ public class TargetCommand extends CommandBase {
 
     double previous_error, integral = 0;
     int setpoint = Integer.MAX_VALUE;
-    DifferentialDrive robotDrive;
-    AHRS gyro;
     double error;
 
     public TargetCommand(DriveSubsystem driveSubsystem, LimelightSubsystem limelightSubsystem){
@@ -36,12 +34,7 @@ public class TargetCommand extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-
-        robotDrive = new DifferentialDrive(driveSubsystem.getLeftSpeedController(), driveSubsystem.getRightSpeedController());
-        gyro = Constants.gyro;
-
-    }
+    public void initialize() { }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
@@ -51,11 +44,11 @@ public class TargetCommand extends CommandBase {
             System.out.println("rcw " + rcw);
             PID();
             TargetDistance();
-            robotDrive.arcadeDrive(driveY, rcw);
+            driveSubsystem.getDiffDrive().arcadeDrive(driveY, rcw);
             driveHWheel();
         }
         else{
-            robotDrive.arcadeDrive(0, kTargetTurn);
+            driveSubsystem.getDiffDrive().arcadeDrive(0, kTargetTurn);
         }
 
     }
@@ -86,7 +79,7 @@ public class TargetCommand extends CommandBase {
 
     //Method to override in the auto version of this command
     public void driveHWheel() {
-        driveSubsystem.hwheel.set(Constants.joystick.getX() * -1);
+        driveSubsystem.getHWheel().set(Constants.joystick.getX() * -1);
     }
 
     // Returns true when the command should end.

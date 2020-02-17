@@ -35,6 +35,9 @@ public final class Constants {
     public static final ButtonTuple bBalance = new ButtonTuple(joystick, 8);
     public static final ButtonTuple bLowerHWheel = new ButtonTuple(joystick, 9);
     public static final ButtonTuple bRaiseHWheel = new ButtonTuple(joystick, 10);
+    public static final ButtonTuple bRaiseTrolley = new ButtonTuple(joystick, 11);
+    public static final ButtonTuple bLowerTrolley = new ButtonTuple(joystick, 12);
+
 
     //Speed Controllers
     public static final int scDriveRight1 = 1;

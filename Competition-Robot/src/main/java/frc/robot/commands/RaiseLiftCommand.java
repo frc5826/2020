@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class TrolleyRaiseCommand extends CommandBase {
+public class RaiseLiftCommand extends CommandBase {
   
   private final ClimbSubsystem climbSubsystem;
   private boolean finished = false;
@@ -17,7 +17,7 @@ public class TrolleyRaiseCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TrolleyRaiseCommand(ClimbSubsystem subsystem) {
+  public RaiseLiftCommand(ClimbSubsystem subsystem) {
     climbSubsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -31,8 +31,7 @@ public class TrolleyRaiseCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        climbSubsystem.liftPiston.set(DoubleSolenoid.Value.kForward);
-        climbSubsystem.rightPiston.set(DoubleSolenoid.Value.kForward);
+        climbSubsystem.liftPiston.set(DoubleSolenoid.Value.kReverse);
         finished = true;
   }
 
