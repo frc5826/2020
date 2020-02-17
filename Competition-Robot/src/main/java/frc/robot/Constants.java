@@ -42,11 +42,10 @@ public final class Constants {
     public static final int scDriveLeft2 = 3;
     public static final int scDriveLeft1 = 4;
     public static final int scHWheel = 5;
-    public static final int scIntake = 6;
+    public static final int scTrolley = 6;
+    public static final int scIntake = 9;
     public static final int scShooter = 8;
     public static final int scLift = 7;
-    //TODO - Is this on 6 or 9?
-    public static final int scTrolley = 9;
 
     //Sensors
     public static final int diBeamBreak = 5;

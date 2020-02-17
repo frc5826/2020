@@ -3,8 +3,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import static frc.robot.Constants.bConveyor;
-
 //Holds the button and joystick (GenericHID) for a command
 public class ButtonTuple {
     public final int button;
