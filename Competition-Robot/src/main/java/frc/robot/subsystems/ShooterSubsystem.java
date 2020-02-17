@@ -1,23 +1,22 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import static frc.robot.Constants.*;
 
 
+public class ShooterSubsystem extends SubsystemBase {
+  private DigitalInput beamBreakSensor = new DigitalInput(diBeamBreak);
 
-public class Fondler3000Subsystem extends SubsystemBase {
-  private DigitalInput beamBreakSensor = new DigitalInput(5);
-
-  private final WPI_TalonSRX shooterMotor= new WPI_TalonSRX(8);
-  public final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(9);
-  public final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(7);
+  private final WPI_TalonSRX shooterMotor= new WPI_TalonSRX(scShooter);
+  public final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(scIntake);
+  public final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(scLift);
 
   private static final int kMaxAmps = 40;
   private int brokenIterationCount = 0;
 
-  public Fondler3000Subsystem() {
+  public ShooterSubsystem() {
     shooterMotor.setInverted(true);
     intakeMotor.setInverted(true);
     conveyorMotor.setInverted(true);
@@ -49,9 +48,9 @@ public class Fondler3000Subsystem extends SubsystemBase {
   @Override
   public void periodic() {
     if(isBroken()){
-      conveyorMotor.set(0.5);
+      conveyorMotor.set(kConSpeed);
       //System.out.println("Beam is broken");
-    } else if(brokenIterationCount++ > 35){
+    } else if(brokenIterationCount++ > kInputDelay){
       conveyorMotor.set(0);
       //System.out.println("Beam is NOT broken");
       brokenIterationCount = 0;
@@ -71,7 +70,7 @@ public class Fondler3000Subsystem extends SubsystemBase {
   }
 
   //Min 0.0, Max = 1.0
-  public void shoot(double percent){
+  public double shoot(double percent){
     if(percent > 0){
       System.out.println("percent " + percent);
       shooterMotor.set(percent);
@@ -79,13 +78,13 @@ public class Fondler3000Subsystem extends SubsystemBase {
     else {
       shooterMotor.set(0);
     }
+
+    return getShooterCurrent();
   }
 
   public double getShooterCurrent(){
     return shooterMotor.getSupplyCurrent();
   }
-
-  // This method will be called once per scheduler run
 }
 
 

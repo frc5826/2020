@@ -12,37 +12,38 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.HWheelSubsystem;
 
 /**
  * An example command that uses an example subsystem.
  */
 public class JoystickDriveCommand extends CommandBase {
-  
-  private final DriveSubsystem m_subsystem;
+
+  private final DriveSubsystem driveSubsystem;
   private DifferentialDrive robotDrive;
-  
+
 
   /**
    * Creates a new ExampleCommand.
    *
-   * @param subsystem The subsystem used by this command.
+   * @param driveSubsystem The subsystem used by this command.
    */
-  public JoystickDriveCommand(DriveSubsystem subsystem) {
-    m_subsystem = subsystem;
-    addRequirements(subsystem);
+  public JoystickDriveCommand(DriveSubsystem driveSubsystem) {
+    this.driveSubsystem = driveSubsystem;
+    addRequirements(driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    robotDrive = new DifferentialDrive(m_subsystem.getLeftSpeedController(), m_subsystem.getRightSpeedController());
+    robotDrive = new DifferentialDrive(driveSubsystem.getLeftSpeedController(), driveSubsystem.getRightSpeedController());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    robotDrive.arcadeDrive(Constants.joystick.getY() * -1, Constants.joystick.getZ() * .75);
-    m_subsystem.hwheel.set(Constants.joystick.getX());
+    robotDrive.arcadeDrive(Constants.joystick.getY() * -1, Constants.joystick.getZ());
+    driveSubsystem.hwheel.set(Constants.joystick.getX());
   }
 
   // Called once the command ends or is interrupted.

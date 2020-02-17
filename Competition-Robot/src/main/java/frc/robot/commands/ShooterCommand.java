@@ -7,17 +7,17 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.Fondler3000Subsystem;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import static frc.robot.Constants.*;
 
 /**
  * An example command that uses an example subsystem.
  */
 public class ShooterCommand extends CommandBase {
   
-  private final Fondler3000Subsystem fondler3000Subsystem;
+  private final ShooterSubsystem shooterSubsystem;
   
 
   /**
@@ -25,9 +25,9 @@ public class ShooterCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterCommand(Fondler3000Subsystem subsystem) {
-    fondler3000Subsystem = subsystem;
-    addRequirements(fondler3000Subsystem);
+  public ShooterCommand(ShooterSubsystem subsystem) {
+    shooterSubsystem = subsystem;
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -39,20 +39,20 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
-    fondler3000Subsystem.shoot((Constants.joystick.getThrottle() + 1) / 2);
-    System.out.println("current " + fondler3000Subsystem.getShooterCurrent());
-    System.out.println("throttle " + (Constants.joystick.getThrottle() + 1) / 2);
-    
+    double current = shooterSubsystem.shoot(kShootSpeed);
+    System.out.println("current " + current);
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooterSubsystem.stopShooter();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return !bShoot.isPressed();
   }
 }

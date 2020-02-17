@@ -9,27 +9,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.AutoCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.HwheelLowerCommand;
-import frc.robot.commands.HwheelRaiseCommand;
-import frc.robot.commands.JoystickDriveCommand;
-import frc.robot.commands.TrolleyCommand;
-import frc.robot.commands.TrolleyRaiseCommand;
-import frc.robot.commands.TurnCommand;
-import frc.robot.commands.ConveyorCommand;
-import frc.robot.commands.DriveCommandGroup;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.subsystems.BallIntakeSubsystem;
-import frc.robot.subsystems.BallLifterSubsystem;
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.Fondler3000Subsystem;
-import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import static frc.robot.Constants.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -42,20 +26,17 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
-  private final Fondler3000Subsystem fondler3000Subsystem = new Fondler3000Subsystem();
-  //private final BallLifterSubsystem ballLifterSubsystem = new BallLifterSubsystem();
-  //private final BallIntakeSubsystem ballIntakeSubsystem = new BallIntakeSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final HWheelSubsystem hWheelSubsystem = new HWheelSubsystem();
 
-  private final JoystickDriveCommand joystickDrive = new JoystickDriveCommand(driveSubsystem);
+  private final JoystickDriveCommand driveCommand = new JoystickDriveCommand(driveSubsystem);
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
-    //ballIntakeSubsystem.register();
-    //ballLifterSubsystem.register();
   }
 
   /**
@@ -65,29 +46,15 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton center = new JoystickButton(Constants.joystick, 2);
-    center.whenPressed(new AutoCommand(driveSubsystem, limelightSubsystem));
-    
-    JoystickButton climb = new JoystickButton(Constants.joystick, 8);
-    climb.whenPressed(new TrolleyCommand(climbSubsystem, driveSubsystem));
-    
-    JoystickButton intake = new JoystickButton(Constants.joystick, 4);
-    intake.whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(fondler3000Subsystem)));
-    
-    JoystickButton manualConveyor = new JoystickButton(Constants.joystick, 7);
-    manualConveyor.whenPressed(new DriveCommandGroup(driveSubsystem, new ConveyorCommand(fondler3000Subsystem)));
-    
-    JoystickButton shoot = new JoystickButton(Constants.joystick, 1);
-    shoot.whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(fondler3000Subsystem)));
-    
-    //JoystickButton raise = new JoystickButton(Constants.joystick, 10);
-    //raise.whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(driveSubsystem)));
-    
-    //JoystickButton lower = new JoystickButton(Constants.joystick, 9);
-    //lower.whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(driveSubsystem)));
-    
-    JoystickButton trolleyRaise = new JoystickButton(Constants.joystick, 11);
-    trolleyRaise.whenPressed(new TrolleyRaiseCommand(climbSubsystem));
+    bTarget.createButton().whenPressed(new TargetCommand(driveSubsystem, limelightSubsystem));
+    bBalance.createButton().whenPressed(new TrolleyBalanceCommand(climbSubsystem));
+    bIntake.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
+    bConveyor.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ConveyorCommand(shooterSubsystem)));
+    bShoot.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
+    bRaiseHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
+    bLowerHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));
+    bRaiseLift.createButton().whenPressed(new TrolleyRaiseCommand(climbSubsystem));
+    bLowerLift.createButton().whenPressed(new TrolleyPullupCommand(climbSubsystem));
   }
 
 
@@ -97,15 +64,16 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new PrintCommand("Running autonomous...");
-  }
-
-  public Command getJoystickDrive(){
-    return joystickDrive;
+    return new AutoCommand(driveSubsystem, limelightSubsystem);
   }
 
   public Subsystem getDriveSubsystem(){
     return driveSubsystem;
+  }
+
+
+  public JoystickDriveCommand getJoystickDrive() {
+    return driveCommand;
   }
 
 }

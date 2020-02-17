@@ -7,17 +7,17 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.Fondler3000Subsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import static frc.robot.Constants.*;
 
 /**
  * An example command that uses an example subsystem.
  */
 public class ConveyorCommand extends CommandBase {
   
-  private final Fondler3000Subsystem fondler3000Subsystem;
+  private final ShooterSubsystem shooterSubsystem;
   
 
   /**
@@ -25,9 +25,9 @@ public class ConveyorCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ConveyorCommand(Fondler3000Subsystem subsystem) {
-    fondler3000Subsystem = subsystem;
-    addRequirements(fondler3000Subsystem);
+  public ConveyorCommand(ShooterSubsystem subsystem) {
+    shooterSubsystem = subsystem;
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -39,18 +39,18 @@ public class ConveyorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
-    fondler3000Subsystem.conveyorMotor.set(.5);
+    shooterSubsystem.conveyorMotor.set(kConSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    fondler3000Subsystem.conveyorMotor.set(0);
+    shooterSubsystem.conveyorMotor.set(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Constants.joystick.getRawButton(7);
+    return !bConveyor.isPressed();
   }
 }
