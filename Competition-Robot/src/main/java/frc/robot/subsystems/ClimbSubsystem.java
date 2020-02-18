@@ -14,7 +14,7 @@ public class ClimbSubsystem extends SubsystemBase {
     public final DoubleSolenoid liftPiston = new DoubleSolenoid(pCompressor, psLiftFwd, psLiftRev);
 
   public ClimbSubsystem() {
-      trolleyMotor.setInverted(true);
+
   }
 
   @Override

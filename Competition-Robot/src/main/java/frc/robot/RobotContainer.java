@@ -46,7 +46,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    bTarget.createButton().whenPressed(new TargetCommand(driveSubsystem, limelightSubsystem));
+    bTarget.createButton().whenPressed(new TargetCommand(driveSubsystem, limelightSubsystem, shooterSubsystem));
     bBalance.createButton().whenPressed(new TrolleyBalanceCommand(climbSubsystem));
     bIntake.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
     bConveyor.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ConveyorCommand(shooterSubsystem)));
@@ -66,7 +66,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new AutoCommand(driveSubsystem, limelightSubsystem);
+    return new AutoCommand(driveSubsystem, limelightSubsystem, shooterSubsystem);
   }
 
   public Subsystem getDriveSubsystem(){

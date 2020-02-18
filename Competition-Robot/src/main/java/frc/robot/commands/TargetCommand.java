@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+
 import static frc.robot.Constants.*;
 
 /**
@@ -16,6 +18,7 @@ public class TargetCommand extends CommandBase {
 
     protected final DriveSubsystem driveSubsystem;
     private final LimelightSubsystem limelightSubsystem;
+    private final ShooterSubsystem shooterSubsystem;
 
     private double rcw;
     private double driveY;
@@ -24,8 +27,8 @@ public class TargetCommand extends CommandBase {
     int setpoint = Integer.MAX_VALUE;
     double error;
 
-    public TargetCommand(DriveSubsystem driveSubsystem, LimelightSubsystem limelightSubsystem){
-
+    public TargetCommand(DriveSubsystem driveSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shoot){
+        this.shooterSubsystem = shoot;
         this.driveSubsystem = driveSubsystem;
         this.limelightSubsystem = limelightSubsystem;
 
@@ -49,6 +52,15 @@ public class TargetCommand extends CommandBase {
         }
         else{
             driveSubsystem.getDiffDrive().arcadeDrive(0, kTargetTurn);
+        }
+
+        if(Math.abs(driveY) < .4 && Math.abs(this.rcw) < .4){
+            shooterSubsystem.shoot(1.0);
+            shooterSubsystem.conveyorMotor.set(kConSpeed);
+        }
+        else {
+            shooterSubsystem.stopShooter();
+            shooterSubsystem.conveyorMotor.set(0);
         }
 
     }

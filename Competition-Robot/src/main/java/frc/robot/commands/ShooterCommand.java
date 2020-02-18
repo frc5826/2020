@@ -18,7 +18,7 @@ import static frc.robot.Constants.*;
 public class ShooterCommand extends CommandBase {
   
   private final ShooterSubsystem shooterSubsystem;
-  
+  private int counter = 0;
 
   /**
    * Creates a new ExampleCommand.
@@ -33,7 +33,7 @@ public class ShooterCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
@@ -41,6 +41,9 @@ public class ShooterCommand extends CommandBase {
   public void execute() {
     double current = shooterSubsystem.shoot(kShootSpeed);
     System.out.println("current " + current);
+    if(counter++ > 50){
+      shooterSubsystem.conveyorMotor.set(kConSpeed);
+    }
 
   }
 
