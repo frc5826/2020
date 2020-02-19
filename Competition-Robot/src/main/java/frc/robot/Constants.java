@@ -26,17 +26,18 @@ public final class Constants {
     public static AHRS gyro = new AHRS(SPI.Port.kMXP);
 
     //Buttons
-    public static final ButtonTuple bShoot = new ButtonTuple(joystick, 1);
-    public static final ButtonTuple bTarget = new ButtonTuple(joystick, 2);
-    public static final ButtonTuple bIntake = new ButtonTuple(joystick, 4);
-    public static final ButtonTuple bRaiseLift = new ButtonTuple(joystick, 5);
-    public static final ButtonTuple bLowerLift = new ButtonTuple(joystick, 6);
-    public static final ButtonTuple bConveyor = new ButtonTuple(joystick, 7);
-    public static final ButtonTuple bBalance = new ButtonTuple(joystick, 8);
-    public static final ButtonTuple bLowerHWheel = new ButtonTuple(joystick, 9);
-    public static final ButtonTuple bRaiseHWheel = new ButtonTuple(joystick, 10);
-    public static final ButtonTuple bRaiseTrolley = new ButtonTuple(joystick, 11);
-    public static final ButtonTuple bLowerTrolley = new ButtonTuple(joystick, 12);
+    public static final ButtonTuple bShoot = new ButtonTuple(joystick, 1);//1 (manual shoot)
+    public static final ButtonTuple bTarget = new ButtonTuple(joystick, 2);//2 (auto target and shoot)
+    public static final ButtonTuple bIntake = new ButtonTuple(joystick, 3);//3 (hold)
+    public static final ButtonTuple bRaiseLift = new ButtonTuple(joystick, 10);//10
+    public static final ButtonTuple bLowerLift = new ButtonTuple(joystick, 9);//9
+    public static final ButtonTuple bBalanceAuto = new ButtonTuple(joystick, 4);//4(auto level)
+    public static final ButtonTuple bBalanceLeft = new ButtonTuple(joystick, 5);//5 (manual level left)
+    public static final ButtonTuple bBalanceRight = new ButtonTuple(joystick, 6);//6 (manual level right)
+    public static final ButtonTuple bLowerHWheel = new ButtonTuple(joystick, 11);//11
+    public static final ButtonTuple bRaiseHWheel = new ButtonTuple(joystick, 12);//12
+    public static final ButtonTuple bRaiseTrolley = new ButtonTuple(joystick, 8);//8
+    public static final ButtonTuple bLowerTrolley = new ButtonTuple(joystick, 7);//7
 
 
     //Speed Controllers
@@ -82,7 +83,7 @@ public final class Constants {
     public static final double kShootSpeed = 1.0;
     public static final double kInputDelay = 35;
     public static final double kConSpeed = 0.5;
-
+    public static final double kTrolley = .2;
 
 
     //Limit the value to the abs(max)

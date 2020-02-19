@@ -38,7 +38,6 @@ public class TrolleyBalanceCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //TODO - Is this pitch, yaw or roll
     float speed = gyro.getPitch() / 20;
     climbSubsystem.trolleyMotor.set(speed);
   }
@@ -52,6 +51,6 @@ public class TrolleyBalanceCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !bBalance.isPressed();
+    return !bBalanceAuto.isPressed();
   }
 }
