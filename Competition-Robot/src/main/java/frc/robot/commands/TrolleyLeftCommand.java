@@ -7,49 +7,43 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.HWheelSubsystem;
+import static frc.robot.Constants.*;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class HwheelLowerCommand extends CommandBase {
+public class TrolleyLeftCommand extends CommandBase {
+  
+  private final ClimbSubsystem climbSubsystem;
 
-  private final HWheelSubsystem hWheelSubsystem;
-  private boolean finished = false;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public HwheelLowerCommand(HWheelSubsystem subsystem) {
-    hWheelSubsystem = subsystem;
+  public TrolleyLeftCommand(ClimbSubsystem subsystem) {
+    climbSubsystem = subsystem;
     addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    finished = false;
+    
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // 
   @Override
   public void execute() {
-    hWheelSubsystem.wheelift.set(DoubleSolenoid.Value.kForward);
-    finished = true;
+    climbSubsystem.trolleyMotor.set(kTrolley);
   }
 
-  // Called once the command ends or is interrupted.
+  // 
   @Override
   public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return finished;
+    climbSubsystem.trolleyMotor.set(0);
   }
 }

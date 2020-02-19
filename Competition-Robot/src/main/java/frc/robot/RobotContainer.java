@@ -47,9 +47,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     bTarget.createButton().whenPressed(new TargetCommand(driveSubsystem, limelightSubsystem, shooterSubsystem));
-    bBalance.createButton().whenPressed(new TrolleyBalanceCommand(climbSubsystem));
+    bBalanceAuto.createButton().whenPressed(new TrolleyBalanceCommand(climbSubsystem));
+    bBalanceLeft.createButton().whenPressed(new TrolleyLeftCommand(climbSubsystem));
+    bBalanceRight.createButton().whenPressed(new TrolleyRightCommand(climbSubsystem));
     bIntake.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
-    bConveyor.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ConveyorCommand(shooterSubsystem)));
     bShoot.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
     bRaiseHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
     bLowerHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));

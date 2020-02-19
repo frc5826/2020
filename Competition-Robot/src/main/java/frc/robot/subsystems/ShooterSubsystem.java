@@ -15,6 +15,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   private static final int kMaxAmps = 40;
   private int brokenIterationCount = 0;
+  int pov = joystick.getPOV(0);
 
   public ShooterSubsystem() {
     shooterMotor.setInverted(true);
@@ -47,14 +48,24 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(isBroken()){
+    //Dpad top three points
+    if(pov == 45 || pov == 0 || pov == 315){
       conveyorMotor.set(kConSpeed);
-      //System.out.println("Beam is broken");
-    } else if(brokenIterationCount++ > kInputDelay){
-      conveyorMotor.set(0);
-      //System.out.println("Beam is NOT broken");
-      brokenIterationCount = 0;
     }
+    //Dpad bottom three points
+    else if(pov == 180 || pov == 135|| pov == 225){
+      conveyorMotor.set(-kConSpeed);
+    } else {
+      if(isBroken()){
+        conveyorMotor.set(kConSpeed);
+        //System.out.println("Beam is broken");
+      } else if(brokenIterationCount++ > kInputDelay){
+        conveyorMotor.set(0);
+        //System.out.println("Beam is NOT broken");
+        brokenIterationCount = 0;
+      }
+    }
+
   }
 
   boolean isBroken(){

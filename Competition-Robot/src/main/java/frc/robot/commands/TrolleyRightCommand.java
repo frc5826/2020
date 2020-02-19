@@ -7,50 +7,43 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import static frc.robot.Constants.*;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class ConveyorCommand extends CommandBase {
+public class TrolleyRightCommand extends CommandBase {
   
-  private final ShooterSubsystem shooterSubsystem;
-  
+  private final ClimbSubsystem climbSubsystem;
+
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ConveyorCommand(ShooterSubsystem subsystem) {
-    shooterSubsystem = subsystem;
-    addRequirements(shooterSubsystem);
+  public TrolleyRightCommand(ClimbSubsystem subsystem) {
+    climbSubsystem = subsystem;
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    
   }
 
-  // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
+  // 
   @Override
   public void execute() {
-    shooterSubsystem.conveyorMotor.set(kConSpeed);
+    climbSubsystem.trolleyMotor.set(-kTrolley);
   }
 
-  // Called once the command ends or is interrupted.
+  // 
   @Override
   public void end(boolean interrupted) {
-    shooterSubsystem.conveyorMotor.set(0);
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !bConveyor.isPressed();
+    climbSubsystem.trolleyMotor.set(0);
   }
 }
