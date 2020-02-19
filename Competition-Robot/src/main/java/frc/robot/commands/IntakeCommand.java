@@ -38,13 +38,13 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
-    shooterSubsystem.intakeMotor.set(kIntakeSpeed);
+    shooterSubsystem.startIntake();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooterSubsystem.intakeMotor.set(0);
+    shooterSubsystem.stopIntake();
   }
 
   // Returns true when the command should end.

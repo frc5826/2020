@@ -51,16 +51,6 @@ public class TargetCommand extends CommandBase {
         else{
             driveSubsystem.getDiffDrive().arcadeDrive(0, kTargetTurn);
         }
-
-        if(Math.abs(driveY) < .4 && Math.abs(this.rcw) < .4){
-            shooterSubsystem.shoot(1.0);
-            shooterSubsystem.conveyorMotor.set(kConSpeed);
-        }
-        else {
-            shooterSubsystem.stopShooter();
-            shooterSubsystem.conveyorMotor.set(0);
-        }
-
     }
 
     // Called once the command ends or is interrupted.

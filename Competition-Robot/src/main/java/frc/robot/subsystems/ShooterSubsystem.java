@@ -10,8 +10,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private DigitalInput beamBreakSensor = new DigitalInput(diBeamBreak);
 
   private final WPI_TalonSRX shooterMotor= new WPI_TalonSRX(scShooter);
-  public final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(scIntake);
-  public final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(scLift);
+  private final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(scIntake);
+  private final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(scLift);
 
   private static final int kMaxAmps = 40;
   private int brokenIterationCount = 0;
@@ -102,6 +102,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getShooterCurrent(){
     return shooterMotor.getSupplyCurrent();
+  }
+
+  public void startIntake(){
+    intakeMotor.set(kIntakeSpeed);
+  }
+
+  public void stopIntake() {
+    intakeMotor.set(0);
   }
 }
 
