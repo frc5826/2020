@@ -45,6 +45,14 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.configContinuousCurrentLimit(kMaxAmps);
   }
 
+  public boolean isFastEnough() {
+    boolean goodSpeed = true;
+    boolean badSpeed = false;
+
+
+
+  }
+
   @Override
   public void periodic() {
     if(isBroken()){

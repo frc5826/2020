@@ -7,42 +7,53 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
+import java.util.function.BooleanSupplier;
+
 import static frc.robot.Constants.*;
 
 /**
  * An example command that uses an example subsystem.
  */
 public class ShooterCommand extends CommandBase {
-  
+
   private final ShooterSubsystem shooterSubsystem;
-  private int counter = 0;
+  private BooleanSupplier shouldShoot;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterCommand(ShooterSubsystem subsystem) {
+  public ShooterCommand(ShooterSubsystem subsystem, BooleanSupplier shouldShoot) {
     shooterSubsystem = subsystem;
+    this.shouldShoot = shouldShoot;
     addRequirements(shooterSubsystem);
   }
+
+  public ShooterCommand(ShooterSubsystem subsystem) {
+    this(subsystem, () -> true);
+  }
+
+
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
-    double current = shooterSubsystem.shoot(kShootSpeed);
-    System.out.println("current " + current);
-    if(counter++ > 50){
-      shooterSubsystem.conveyorMotor.set(kConSpeed);
+    if(shouldShoot.getAsBoolean()){
+      double current = shooterSubsystem.shoot(kShootSpeed);
+      System.out.println("current " + current);
+
+    }
+    else{
+      shooterSubsystem.stopShooter();
     }
 
   }
