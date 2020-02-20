@@ -47,6 +47,7 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.configContinuousCurrentLimit(kMaxAmps);
   }
 
+  //TODO - Is the shooter up to speed to shoot
   public boolean isFastEnough() {
     //return true always until an encoder exists
     return true;
@@ -89,19 +90,12 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void stopShooter(){
-    shoot(-1);
+    shooterMotor.set(0);
   }
 
   //Min 0.0, Max = 1.0
-  public double shoot(double percent){
-    if(percent > 0){
-      System.out.println("percent " + percent);
-      shooterMotor.set(percent);
-    }
-    else {
-      shooterMotor.set(0);
-    }
-
+  public double spinShoot(){
+    shooterMotor.set(1.0);
     return getShooterCurrent();
   }
 
@@ -115,6 +109,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void stopIntake() {
     intakeMotor.set(0);
+  }
+
+  public void spinConveyor() {
+    conveyorMotor.set(kConSpeed);
+  }
+
+  public void stopConveyor() {
+    conveyorMotor.set(0);
   }
 }
 

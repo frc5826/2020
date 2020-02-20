@@ -37,23 +37,18 @@ public class ShooterCommand extends CommandBase {
     this(subsystem, () -> true);
   }
 
-
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
-
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
     shooterSubsystem.setShootMode(true);
-    if(shouldShoot.getAsBoolean()){
-      double current = shooterSubsystem.shoot(kShootSpeed);
-      System.out.println("current " + current);
+    //The shooter should be spinning up from the get-go
+    shooterSubsystem.spinShoot();
 
+    if(shouldShoot.getAsBoolean() && shooterSubsystem.isFastEnough()){
+      shooterSubsystem.spinConveyor();
     }
     else{
+      shooterSubsystem.stopConveyor();
       shooterSubsystem.stopShooter();
     }
 

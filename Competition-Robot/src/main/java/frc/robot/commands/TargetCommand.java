@@ -7,6 +7,8 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
+import java.util.function.BooleanSupplier;
+
 import static frc.robot.Constants.*;
 
 /**
@@ -82,4 +84,8 @@ public class TargetCommand extends CommandBase {
         driveSubsystem.driveHWheel(Constants.joystick.getX() * -1);
     }
 
+    //TODO - Implement when the robot is in a good spot to shoot
+    public boolean isTargetAcquired() {
+        return true;
+    }
 }
