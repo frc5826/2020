@@ -64,9 +64,4 @@ public class ShooterCommand extends CommandBase {
     shooterSubsystem.stopShooter();
   }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !bShoot.isPressed();
-  }
 }

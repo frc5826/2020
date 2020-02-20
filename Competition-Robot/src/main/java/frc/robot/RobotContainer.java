@@ -46,12 +46,12 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    bTarget.createButton().whenPressed(new TargetCommand(driveSubsystem, limelightSubsystem, shooterSubsystem));
-    bBalanceAuto.createButton().whenPressed(new TrolleyBalanceCommand(climbSubsystem));
-    bBalanceLeft.createButton().whenPressed(new TrolleyLeftCommand(climbSubsystem));
-    bBalanceRight.createButton().whenPressed(new TrolleyRightCommand(climbSubsystem));
-    bIntake.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
-    bShoot.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
+    bTarget.createButton().whenHeld(new TargetCommand(driveSubsystem, limelightSubsystem, shooterSubsystem));
+    bBalanceAuto.createButton().whenHeld(new TrolleyBalanceCommand(climbSubsystem));
+    bBalanceLeft.createButton().whenHeld(new TrolleyLeftCommand(climbSubsystem));
+    bBalanceRight.createButton().whenHeld(new TrolleyRightCommand(climbSubsystem));
+    bIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
+    bShoot.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
     bRaiseHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
     bLowerHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));
     bRaiseLift.createButton().whenPressed(new RaiseLiftCommand(climbSubsystem));

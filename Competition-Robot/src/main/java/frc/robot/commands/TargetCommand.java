@@ -82,10 +82,4 @@ public class TargetCommand extends CommandBase {
         driveSubsystem.driveHWheel(Constants.joystick.getX() * -1);
     }
 
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() {
-        return !bTarget.isPressed();
-    }
-
 }

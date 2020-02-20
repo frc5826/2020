@@ -47,9 +47,4 @@ public class IntakeCommand extends CommandBase {
     shooterSubsystem.stopIntake();
   }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !bIntake.isPressed();
-  }
 }
