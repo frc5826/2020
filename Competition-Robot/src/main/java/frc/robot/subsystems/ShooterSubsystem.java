@@ -47,6 +47,7 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.configContinuousCurrentLimit(kMaxAmps);
   }
 
+  //TODO - Is the shooter up to speed to shoot
   public boolean isFastEnough() {
     //return true always until an encoder exists
     return true;
@@ -55,24 +56,29 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     if(!shootMode) {
-      //Dpad top three points
-      if (pov == 45 || pov == 0 || pov == 315) {
+      if (isBroken()) {
         conveyorMotor.set(kConSpeed);
-      }
-      //Dpad bottom three points
-      else if (pov == 180 || pov == 135 || pov == 225) {
-        conveyorMotor.set(-kConSpeed);
-      } else {
-        if (isBroken()) {
-          conveyorMotor.set(kConSpeed);
-          //System.out.println("Beam is broken");
-        } else if (brokenIterationCount++ > kInputDelay) {
-          conveyorMotor.set(0);
-          //System.out.println("Beam is NOT broken");
-          brokenIterationCount = 0;
-        }
+      } else if (brokenIterationCount++ > kInputDelay) {
+        conveyorMotor.set(0);
+        brokenIterationCount = 0;
       }
     }
+
+    //Dpad top three points
+    if (pov == 45 || pov == 0 || pov == 315) {
+      conveyorMotor.set(kConSpeed);
+    }
+    //Dpad bottom three points
+    else if (pov == 180 || pov == 135 || pov == 225) {
+      conveyorMotor.set(-kConSpeed);
+    }
+    else{
+      conveyorMotor.set(0);
+    }
+  }
+
+  public void setShootMode(boolean b){
+    shootMode = b;
   }
 
   boolean isBroken(){
@@ -84,19 +90,12 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void stopShooter(){
-    shoot(-1);
+    shooterMotor.set(0);
   }
 
   //Min 0.0, Max = 1.0
-  public double shoot(double percent){
-    if(percent > 0){
-      System.out.println("percent " + percent);
-      shooterMotor.set(percent);
-    }
-    else {
-      shooterMotor.set(0);
-    }
-
+  public double spinShoot(){
+    shooterMotor.set(1.0);
     return getShooterCurrent();
   }
 
@@ -110,6 +109,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void stopIntake() {
     intakeMotor.set(0);
+  }
+
+  public void spinConveyor() {
+    conveyorMotor.set(kConSpeed);
+  }
+
+  public void stopConveyor() {
+    conveyorMotor.set(0);
   }
 }
 

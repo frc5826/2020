@@ -19,22 +19,21 @@ public class DriveSubsystem extends SubsystemBase {
 
     private DifferentialDrive diffDrive = new DifferentialDrive(leftSpeedControllers, rightSpeedControllers);
 
-  public DriveSubsystem() {
-      hwheel.setInverted(true);
-      diffDrive.arcadeDrive(0,0);
-  }
+    public DriveSubsystem() {
+        hwheel.setInverted(true);
+        diffDrive.arcadeDrive(0,0);
+    }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    }
 
-  public DifferentialDrive getDiffDrive(){
-      return diffDrive;
-  }
+    public DifferentialDrive getDiffDrive(){
+        return diffDrive;
+    }
 
-  public WPI_TalonSRX getHWheel(){
-      return hwheel;
-  }
-
+    public void driveHWheel(double speed) {
+        hwheel.set(speed);
+    }
 }

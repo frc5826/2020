@@ -7,6 +7,8 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
+import java.util.function.BooleanSupplier;
+
 import static frc.robot.Constants.*;
 
 /**
@@ -79,13 +81,11 @@ public class TargetCommand extends CommandBase {
 
     //Method to override in the auto version of this command
     public void driveHWheel() {
-        driveSubsystem.getHWheel().set(Constants.joystick.getX() * -1);
+        driveSubsystem.driveHWheel(Constants.joystick.getX() * -1);
     }
 
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() {
-        return !bTarget.isPressed();
+    //TODO - Implement when the robot is in a good spot to shoot
+    public boolean isTargetAcquired() {
+        return true;
     }
-
 }

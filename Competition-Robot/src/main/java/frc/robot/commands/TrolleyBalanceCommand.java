@@ -48,9 +48,4 @@ public class TrolleyBalanceCommand extends CommandBase {
     climbSubsystem.trolleyMotor.set(0);
   }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return !bBalanceAuto.isPressed();
-  }
 }

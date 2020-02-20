@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -46,12 +47,14 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    bTarget.createButton().whenPressed(new TargetCommand(driveSubsystem, limelightSubsystem, shooterSubsystem));
-    bBalanceAuto.createButton().whenPressed(new TrolleyBalanceCommand(climbSubsystem));
-    bBalanceLeft.createButton().whenPressed(new TrolleyLeftCommand(climbSubsystem));
-    bBalanceRight.createButton().whenPressed(new TrolleyRightCommand(climbSubsystem));
-    bIntake.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
-    bShoot.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
+    TargetCommand tc = new TargetCommand(driveSubsystem, limelightSubsystem, shooterSubsystem);
+    bTarget.createButton().whenHeld(new ParallelCommandGroup(tc, new ShooterCommand(shooterSubsystem, () -> tc.isTargetAcquired())));
+
+    bBalanceAuto.createButton().whenHeld(new TrolleyBalanceCommand(climbSubsystem));
+    bBalanceLeft.createButton().whenHeld(new TrolleyLeftCommand(climbSubsystem));
+    bBalanceRight.createButton().whenHeld(new TrolleyRightCommand(climbSubsystem));
+    bIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
+    bShoot.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
     bRaiseHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
     bLowerHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));
     bRaiseLift.createButton().whenPressed(new RaiseLiftCommand(climbSubsystem));
