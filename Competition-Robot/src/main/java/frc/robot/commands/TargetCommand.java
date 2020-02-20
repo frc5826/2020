@@ -79,7 +79,7 @@ public class TargetCommand extends CommandBase {
 
     //Method to override in the auto version of this command
     public void driveHWheel() {
-        driveSubsystem.getHWheel().set(Constants.joystick.getX() * -1);
+        driveSubsystem.driveHWheel(Constants.joystick.getX() * -1);
     }
 
     // Returns true when the command should end.

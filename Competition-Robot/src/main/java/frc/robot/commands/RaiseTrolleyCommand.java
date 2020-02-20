@@ -31,8 +31,7 @@ public class RaiseTrolleyCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        climbSubsystem.rightPiston.set(DoubleSolenoid.Value.kForward);
-        climbSubsystem.leftPiston.set(DoubleSolenoid.Value.kForward);
+        climbSubsystem.raiseTrolley();
         finished = true;
   }
 

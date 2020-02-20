@@ -37,7 +37,7 @@ public class JoystickDriveCommand extends CommandBase {
   @Override
   public void execute() {
     driveSubsystem.getDiffDrive().arcadeDrive(Constants.joystick.getY() * -1, Constants.joystick.getZ());
-    driveSubsystem.getHWheel().set(Constants.joystick.getX());
+    driveSubsystem.driveHWheel(Constants.joystick.getX());
   }
 
   // Called once the command ends or is interrupted.

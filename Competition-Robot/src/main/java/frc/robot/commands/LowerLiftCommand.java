@@ -31,7 +31,7 @@ public class LowerLiftCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        climbSubsystem.liftPiston.set(DoubleSolenoid.Value.kForward);
+        climbSubsystem.lowerLift();
         finished = true;
   }
 
