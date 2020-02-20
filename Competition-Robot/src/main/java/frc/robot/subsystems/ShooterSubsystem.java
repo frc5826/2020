@@ -55,24 +55,29 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     if(!shootMode) {
-      //Dpad top three points
-      if (pov == 45 || pov == 0 || pov == 315) {
+      if (isBroken()) {
         conveyorMotor.set(kConSpeed);
-      }
-      //Dpad bottom three points
-      else if (pov == 180 || pov == 135 || pov == 225) {
-        conveyorMotor.set(-kConSpeed);
-      } else {
-        if (isBroken()) {
-          conveyorMotor.set(kConSpeed);
-          //System.out.println("Beam is broken");
-        } else if (brokenIterationCount++ > kInputDelay) {
-          conveyorMotor.set(0);
-          //System.out.println("Beam is NOT broken");
-          brokenIterationCount = 0;
-        }
+      } else if (brokenIterationCount++ > kInputDelay) {
+        conveyorMotor.set(0);
+        brokenIterationCount = 0;
       }
     }
+
+    //Dpad top three points
+    if (pov == 45 || pov == 0 || pov == 315) {
+      conveyorMotor.set(kConSpeed);
+    }
+    //Dpad bottom three points
+    else if (pov == 180 || pov == 135 || pov == 225) {
+      conveyorMotor.set(-kConSpeed);
+    }
+    else{
+      conveyorMotor.set(0);
+    }
+  }
+
+  public void setShootMode(boolean b){
+    shootMode = b;
   }
 
   boolean isBroken(){

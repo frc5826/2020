@@ -47,6 +47,7 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
   @Override
   public void execute() {
+    shooterSubsystem.setShootMode(true);
     if(shouldShoot.getAsBoolean()){
       double current = shooterSubsystem.shoot(kShootSpeed);
       System.out.println("current " + current);
@@ -62,6 +63,7 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooterSubsystem.stopShooter();
+    shooterSubsystem.setShootMode(false);
   }
 
 }
