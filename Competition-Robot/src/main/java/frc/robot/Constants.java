@@ -57,26 +57,30 @@ public final class Constants {
     //Pneumatics
     public static final int pCompressor = 11;
 
-    public static final int psLiftFwd = 0;
-    public static final int psLiftRev = 1;
+    public static final int psLiftFwd = 1;
+    public static final int psLiftRev = 0;
     public static final int psHWheelFwd = 2;
     public static final int psHWheelRec = 3;
-    public static final int psRClimbFwd = 4;
-    public static final int psRClimbRev = 5;
-    public static final int psLClimbFwd = 6;
+    public static final int psClimbDead = 4;
+    public static final int psClimbRev = 5;
+    public static final int psClimbFwd = 6;
     public static final int psLClimbRev = 7;
 
 
 
     //Commands
     //Target
-    public static final double kTargetP = 0.050;
-    public static final double kTargetI = 0.0025;
-    public static final double kTargetD = 0.0065;
+    public static final double kTargetTurnP = 0.050;
+    public static final double kTargetTurnI = 0.0025;
+    public static final double kTargetTurnD = 0.0065;
 
-    public static final double kLLHeightAngle = -.2;
+    public static final double kTargetDriveP = 0.050;
+    public static final double kTargetDriveI = 0.0025;
+    public static final double kTargetDriveD = 0.0065;
+
+    public static final double kLLHeightAngle = 21.7;
     public static final double kTargetTurn = 0.6;
-    public static final double kTargetErrorMargin = 0.2;
+    public static final double kTolerance = 0.3;
 
     //Shooter, Intake & Conveyor
     public static final double kIntakeSpeed = 1.0;

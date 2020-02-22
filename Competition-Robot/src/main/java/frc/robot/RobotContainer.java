@@ -70,7 +70,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new AutoCommand(driveSubsystem, limelightSubsystem, shooterSubsystem);
+    AutoCommand tc = new AutoCommand(driveSubsystem, limelightSubsystem, shooterSubsystem);
+    return new ParallelCommandGroup(tc, new ShooterCommand(shooterSubsystem, () -> tc.isTargetAcquired()));
   }
 
   public Subsystem getDriveSubsystem(){

@@ -9,8 +9,8 @@ public class ClimbSubsystem extends SubsystemBase {
 
     public final WPI_TalonSRX trolleyMotor = new WPI_TalonSRX(scTrolley);
 
-    private final DoubleSolenoid leftPiston = new DoubleSolenoid(pCompressor, psLClimbFwd, psLClimbRev);
-    private final DoubleSolenoid rightPiston = new DoubleSolenoid(pCompressor, psRClimbFwd, psRClimbRev);
+    private final DoubleSolenoid lowerPiston = new DoubleSolenoid(pCompressor, psClimbFwd, psLClimbRev);
+    private final DoubleSolenoid raisePiston = new DoubleSolenoid(pCompressor, psClimbDead, psClimbRev);
     private final DoubleSolenoid liftPiston = new DoubleSolenoid(pCompressor, psLiftFwd, psLiftRev);
 
   public ClimbSubsystem() {
@@ -32,12 +32,12 @@ public class ClimbSubsystem extends SubsystemBase {
     }
 
     public void lowerTrolley() {
-        rightPiston.set(DoubleSolenoid.Value.kReverse);
-        leftPiston.set(DoubleSolenoid.Value.kReverse);
+        raisePiston.set(DoubleSolenoid.Value.kReverse);
+        lowerPiston.set(DoubleSolenoid.Value.kForward);
     }
 
     public void raiseTrolley() {
-        rightPiston.set(DoubleSolenoid.Value.kForward);
-        leftPiston.set(DoubleSolenoid.Value.kForward);
+        raisePiston.set(DoubleSolenoid.Value.kForward);
+        lowerPiston.set(DoubleSolenoid.Value.kReverse);
     }
 }

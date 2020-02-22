@@ -39,15 +39,15 @@ public class TargetCommand extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        pidTurn = new PID(0.050,0.0025,0.0065);
-        pidDrive = new PID(0.050, 0.0025,0.0065);
+        pidTurn = new PID(kTargetTurnP,kTargetTurnI,kTargetTurnD);
+        pidDrive = new PID(kTargetDriveP, kTargetDriveI,kTargetDriveD);
     }
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         if(limelightSubsystem.isTargetVisable()){
             pidTurn.setSetpoint(Constants.gyro.getAngle() + limelightSubsystem.getTargetAngleOffset());
-            pidDrive.setSetpoint(-0.2);
+            pidDrive.setSetpoint(kLLHeightAngle);
             pidTurn.calculate(gyro.getAngle());
             pidDrive.calculate(limelightSubsystem.getHeightAngle());
             System.out.println("rcw " + pidDrive.getOutput());
@@ -64,25 +64,6 @@ public class TargetCommand extends CommandBase {
     public void end(boolean interrupted) {
     }
 
-    public void PID() {
-        error = setpoint - gyro.getAngle(); // Error = Target - Actual
-        this.integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal
-        final double derivative = (error - this.previous_error) / .02;
-        this.rcw = kTargetP * error + kTargetI * this.integral + kTargetD * derivative;
-        this.previous_error = error;
-    }
-
-    public void TargetDistance() {
-        if(limelightSubsystem.getHeightAngle() > kLLHeightAngle + kTargetErrorMargin) {
-            driveY = -.5;
-        }
-        else if(limelightSubsystem.getHeightAngle() < kLLHeightAngle - kTargetErrorMargin) {
-            driveY = .5;
-        } else {
-            driveY = 0;
-        }
-    }
-
     //Method to override in the auto version of this command
     public void driveHWheel() {
         driveSubsystem.driveHWheel(Constants.joystick.getX() * -1);
@@ -90,6 +71,10 @@ public class TargetCommand extends CommandBase {
 
     //TODO - Implement when the robot is in a good spot to shoot
     public boolean isTargetAcquired() {
-        return true;
+        if (Math.abs(pidDrive.getOutput()) < kTolerance && Math.abs(pidTurn.getOutput()) < kTolerance) {
+            return true;
+        } else {
+            return false;
+    }
     }
 }
