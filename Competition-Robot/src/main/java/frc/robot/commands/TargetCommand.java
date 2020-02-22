@@ -73,9 +73,7 @@ public class TargetCommand extends CommandBase {
     public boolean isTargetAcquired() {
         if (Math.abs(pidDrive.getOutput()) < kTolerance && Math.abs(pidTurn.getOutput()) < kTolerance) {
             return true;
-        }
-
-        else{
+        } else {
             return false;
     }
     }
