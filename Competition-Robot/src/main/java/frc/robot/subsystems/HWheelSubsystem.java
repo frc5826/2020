@@ -8,7 +8,7 @@ public class HWheelSubsystem extends SubsystemBase {
     private final DoubleSolenoid wheeLift = new DoubleSolenoid(pCompressor, psHWheelFwd, psHWheelRec);
 
     public HWheelSubsystem() {
-
+        lowerHWheel();
     }
 
     @Override

@@ -29,14 +29,14 @@ public final class Constants {
     public static final ButtonTuple bShoot = new ButtonTuple(joystick, 1);//1 (manual shoot)
     public static final ButtonTuple bTarget = new ButtonTuple(joystick, 2);//2 (auto target and shoot)
     public static final ButtonTuple bIntake = new ButtonTuple(joystick, 3);//3 (hold)
-    public static final ButtonTuple bRaiseLift = new ButtonTuple(joystick, 10);//10
+    public static final ButtonTuple bRaiseLift = new ButtonTuple(joystick, 10);//10 x
     public static final ButtonTuple bLowerLift = new ButtonTuple(joystick, 9);//9
     public static final ButtonTuple bBalanceAuto = new ButtonTuple(joystick, 4);//4(auto level)
     public static final ButtonTuple bBalanceLeft = new ButtonTuple(joystick, 5);//5 (manual level left)
     public static final ButtonTuple bBalanceRight = new ButtonTuple(joystick, 6);//6 (manual level right)
     public static final ButtonTuple bLowerHWheel = new ButtonTuple(joystick, 11);//11
     public static final ButtonTuple bRaiseHWheel = new ButtonTuple(joystick, 12);//12
-    public static final ButtonTuple bRaiseTrolley = new ButtonTuple(joystick, 8);//8
+    public static final ButtonTuple bRaiseTrolley = new ButtonTuple(joystick, 8);//8 x
     public static final ButtonTuple bLowerTrolley = new ButtonTuple(joystick, 7);//7
 
 
@@ -57,14 +57,14 @@ public final class Constants {
     //Pneumatics
     public static final int pCompressor = 11;
 
-    public static final int psLiftFwd = 1;
-    public static final int psLiftRev = 0;
+    public static final int psLiftFwd = 0;
+    public static final int psLiftRev = 1;
     public static final int psHWheelFwd = 2;
     public static final int psHWheelRec = 3;
     public static final int psClimbDead = 4;
     public static final int psClimbRev = 5;
-    public static final int psClimbFwd = 6;
-    public static final int psLClimbRev = 7;
+    public static final int psClimbFwd = 7;
+    public static final int psLClimbRev = 6;
 
 
 
@@ -74,22 +74,21 @@ public final class Constants {
     public static final double kTargetTurnI = 0.0025;
     public static final double kTargetTurnD = 0.0065;
 
-    public static final double kTargetDriveP = 0.050;
-    public static final double kTargetDriveI = 0.0025;
-    public static final double kTargetDriveD = 0.0065;
+    public static final double kTargetDriveP = 0.2;
+    public static final double kTargetDriveI = 0.0;
+    public static final double kTargetDriveD = 0.03;
 
-    public static final double kLLHeightAngle = 17;
+    public static final double kLLHeightAngle = 12.6;
     public static final double kTargetTurn = 0.6;
-    public static final double kTolerance = 0.3;
+    public static final double kTolerance = 0.35;
 
     //Shooter, Intake & Conveyor
     public static final double kIntakeSpeed = 1.0;
     public static final double kShootSpeed = 1.0;
-    public static final double kShootRPM = 100.0;
-    public static final double kInputDelay = 35;
+    public static final double kShootRPM = 52000.0;
+    public static final double kInputDelay = 0;
     public static final double kConSpeed = 0.5;
     public static final double kTrolley = .2;
-
 
     //Talon speed control
     public static final int kSlotIdx = 0;

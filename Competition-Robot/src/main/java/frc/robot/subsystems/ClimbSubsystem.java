@@ -14,7 +14,8 @@ public class ClimbSubsystem extends SubsystemBase {
     private final DoubleSolenoid liftPiston = new DoubleSolenoid(pCompressor, psLiftFwd, psLiftRev);
 
   public ClimbSubsystem() {
-
+        lowerLift();
+        lowerTrolley();
   }
 
   @Override

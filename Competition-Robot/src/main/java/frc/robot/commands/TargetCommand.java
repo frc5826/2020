@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveSubsystem;
@@ -32,15 +33,16 @@ public class TargetCommand extends CommandBase {
         this.shooterSubsystem = shoot;
         this.driveSubsystem = driveSubsystem;
         this.limelightSubsystem = limelightSubsystem;
-
         addRequirements(driveSubsystem, limelightSubsystem);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+
         pidTurn = new PID(kTargetTurnP,kTargetTurnI,kTargetTurnD);
-        pidDrive = new PID(kTargetDriveP, kTargetDriveI,kTargetDriveD);
+        pidDrive = new PID(SmartDashboard.getNumber("P",0.05),
+                SmartDashboard.getNumber("I", 0.0025), SmartDashboard.getNumber("D", 0.0065));
     }
     // Called every time the scheduler runs while the command is scheduled.
     @Override

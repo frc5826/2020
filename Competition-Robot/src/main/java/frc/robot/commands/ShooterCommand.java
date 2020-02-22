@@ -49,7 +49,6 @@ public class ShooterCommand extends CommandBase {
     }
     else{
       shooterSubsystem.stopConveyor();
-      shooterSubsystem.stopShooter();
     }
 
   }

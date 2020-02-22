@@ -72,8 +72,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //TODO - Is the shooter up to speed to shoot
   public boolean isFastEnough() {
-    //return true always until an encoder exists
-    return true;
+    return shooterMotor.getSelectedSensorVelocity(kPIDLoopIdx) > kShootRPM * .95;
   }
 
   @Override
@@ -127,8 +126,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //10 is RPM
     //8192 is count per full revolution
     //600 is units per minute
-    double targetV = kShootSpeed * kShootRPM * 8192 / 600;
-    shooterMotor.set(ControlMode.Velocity, targetV);
+    shooterMotor.set(ControlMode.Velocity, kShootRPM);
     return getShooterCurrent();
   }
 
