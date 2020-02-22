@@ -7,12 +7,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import static frc.robot.Constants.*;
+import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix.motorcontrol.*;
 
 
 public class ShooterSubsystem extends SubsystemBase {
   private DigitalInput beamBreakSensor = new DigitalInput(diBeamBreak);
 
-  private final WPI_TalonSRX shooterMotor= new WPI_TalonSRX(scShooter);
+  private final WPI_TalonSRX shooterMotor = new WPI_TalonSRX(scShooter);
   private final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(scIntake);
   private final WPI_TalonSRX conveyorMotor = new WPI_TalonSRX(scLift);
 
@@ -49,11 +51,27 @@ public class ShooterSubsystem extends SubsystemBase {
 
     //Shouldn't trip at 100%
     shooterMotor.configContinuousCurrentLimit(kMaxAmps);
+
+    shooterMotor.configFactoryDefault();
+    shooterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,
+            kPIDLoopIdx,
+            kTimeoutMs);
+
+
+    shooterMotor.configNominalOutputForward(0, kTimeoutMs);
+    shooterMotor.configNominalOutputReverse(0, kTimeoutMs);
+    shooterMotor.configPeakOutputForward(1, kTimeoutMs);
+    shooterMotor.configPeakOutputReverse(-1, kTimeoutMs);
+
+    /* Config the Velocity closed loop gains in slot0 */
+    shooterMotor.config_kF(kPIDLoopIdx, kGains_Velocit.kF, kTimeoutMs);
+    shooterMotor.config_kP(kPIDLoopIdx, kGains_Velocit.kP, kTimeoutMs);
+    shooterMotor.config_kI(kPIDLoopIdx, kGains_Velocit.kI, kTimeoutMs);
+    shooterMotor.config_kD(kPIDLoopIdx, kGains_Velocit.kD, kTimeoutMs);
   }
 
   //TODO - Is the shooter up to speed to shoot
   public boolean isFastEnough() {
-
     //return true always until an encoder exists
     return true;
   }
@@ -105,7 +123,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //Min 0.0, Max = 1.0
   public double spinShoot(){
-    shooterMotor.set(1.0);
+    //100 is full speed
+    //10 is RPM
+    //8192 is count per full revolution
+    //600 is units per minute
+    double targetV = kShootSpeed * kShootRPM * 8192 / 600;
+    shooterMotor.set(ControlMode.Velocity, targetV);
     return getShooterCurrent();
   }
 

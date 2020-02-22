@@ -37,7 +37,7 @@ public class ShooterCommand extends CommandBase {
     this(subsystem, () -> true);
   }
 
-  // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot.
+  // Called every time the scheduler runs while the command is scheduled. This is the shooter. you idiot. you absolute fool.
   @Override
   public void execute() {
     shooterSubsystem.setShootMode(true);
