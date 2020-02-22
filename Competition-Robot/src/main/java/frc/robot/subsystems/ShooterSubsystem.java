@@ -105,7 +105,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //Min 0.0, Max = 1.0
   public double spinShoot(){
-    shooterMotor.set(1.0);
+    shooterMotor.set(kShootSpeed);
     return getShooterCurrent();
   }
 
