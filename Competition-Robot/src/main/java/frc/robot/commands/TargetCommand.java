@@ -6,8 +6,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-
-import java.util.function.BooleanSupplier;
+import frc.robot.PID;
 
 import static frc.robot.Constants.*;
 
@@ -19,6 +18,8 @@ public class TargetCommand extends CommandBase {
     protected final DriveSubsystem driveSubsystem;
     private final LimelightSubsystem limelightSubsystem;
     private final ShooterSubsystem shooterSubsystem;
+    private PID pidTurn;
+    private PID pidDrive;
 
     private double rcw;
     private double driveY;
@@ -37,17 +38,20 @@ public class TargetCommand extends CommandBase {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() { }
-
+    public void initialize() {
+        pidTurn = new PID(0.050,0.0025,0.0065);
+        pidDrive = new PID(0.050, 0.0025,0.0065);
+    }
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         if(limelightSubsystem.isTargetVisable()){
-            setpoint = (int)(Constants.gyro.getAngle() + limelightSubsystem.getTargetAngleOffset());
-            System.out.println("rcw " + rcw);
-            PID();
-            TargetDistance();
-            driveSubsystem.getDiffDrive().arcadeDrive(driveY, rcw);
+            pidTurn.setSetpoint(Constants.gyro.getAngle() + limelightSubsystem.getTargetAngleOffset());
+            pidDrive.setSetpoint(-0.2);
+            pidTurn.calculate(gyro.getAngle());
+            pidDrive.calculate(limelightSubsystem.getHeightAngle());
+            System.out.println("rcw " + pidDrive.getOutput());
+            driveSubsystem.getDiffDrive().arcadeDrive(pidDrive.getOutput(), pidTurn.getOutput());
             driveHWheel();
         }
         else{

@@ -1,5 +1,8 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,6 +20,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private int brokenIterationCount = 0;
   private int pov = joystick.getPOV(0);
   private boolean shootMode = false;
+  private boolean beamBroken = false;
 
   public ShooterSubsystem() {
     shooterMotor.setInverted(true);
@@ -49,20 +53,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //TODO - Is the shooter up to speed to shoot
   public boolean isFastEnough() {
+
     //return true always until an encoder exists
     return true;
   }
 
   @Override
   public void periodic() {
-    if(!shootMode) {
-      if (isBroken()) {
-        conveyorMotor.set(kConSpeed);
-      } else if (brokenIterationCount++ > kInputDelay) {
-        conveyorMotor.set(0);
-        brokenIterationCount = 0;
-      }
-    }
+    pov = joystick.getPOV(0);
 
     //Dpad top three points
     if (pov == 45 || pov == 0 || pov == 315) {
@@ -72,7 +70,19 @@ public class ShooterSubsystem extends SubsystemBase {
     else if (pov == 180 || pov == 135 || pov == 225) {
       conveyorMotor.set(-kConSpeed);
     }
-    else{
+    else if(!shootMode) {
+      if (isBroken()) {
+        conveyorMotor.set(kConSpeed);
+        beamBroken = true;
+      } else if (beamBroken && brokenIterationCount++ > kInputDelay) {  // Not Broken
+        conveyorMotor.set(0);
+        brokenIterationCount = 0;
+        beamBroken = false;
+      } else if (!beamBroken) {   // Not in shoot mode and we are not coming out of beam break operation
+        conveyorMotor.set(0);
+      }
+    }
+    else{  // Not in shoot mode and no pov value
       conveyorMotor.set(0);
     }
   }

@@ -14,10 +14,4 @@ public class AutoCommand extends TargetCommand {
     public void driveHWheel() {
         //No-op in autonomous
     }
-
-    @Override
-    public boolean isFinished() {
-        //Run until canceled in auto
-        return false;
-    }
 }
