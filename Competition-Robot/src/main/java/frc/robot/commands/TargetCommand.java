@@ -71,10 +71,12 @@ public class TargetCommand extends CommandBase {
 
     //TODO - Implement when the robot is in a good spot to shoot
     public boolean isTargetAcquired() {
-        if (Math.abs(pidDrive.getOutput()) < kTolerance && Math.abs(pidTurn.getOutput()) < kTolerance) {
+        if (Math.abs(pidDrive.getOutput()) < kTolerance &&
+                Math.abs(pidTurn.getOutput()) < kTolerance &&
+                limelightSubsystem.isTargetVisable()) {
             return true;
         } else {
             return false;
-    }
+        }
     }
 }

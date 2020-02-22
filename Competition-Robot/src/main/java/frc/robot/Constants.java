@@ -78,7 +78,7 @@ public final class Constants {
     public static final double kTargetDriveI = 0.0025;
     public static final double kTargetDriveD = 0.0065;
 
-    public static final double kLLHeightAngle = 21.7;
+    public static final double kLLHeightAngle = 17;
     public static final double kTargetTurn = 0.6;
     public static final double kTolerance = 0.3;
 
