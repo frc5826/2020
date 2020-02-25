@@ -38,14 +38,13 @@ public class TrolleyBalanceCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    float speed = gyro.getPitch() / 20;
-    climbSubsystem.trolleyMotor.set(speed);
+    climbSubsystem.balanceTrolley();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    climbSubsystem.trolleyMotor.set(0);
+    climbSubsystem.stopTrolley();
   }
 
 }

@@ -122,6 +122,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //Min 0.0, Max = 1.0
   public double spinShoot(){
+    //TODO - What if you encoder gets unplugged?
     //100 is full speed
     //10 is RPM
     //8192 is count per full revolution

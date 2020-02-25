@@ -38,12 +38,12 @@ public class TrolleyRightCommand extends CommandBase {
   // 
   @Override
   public void execute() {
-    climbSubsystem.trolleyMotor.set(-kTrolley);
+    climbSubsystem.setTrolley(-kTrolley);
   }
 
   // 
   @Override
   public void end(boolean interrupted) {
-    climbSubsystem.trolleyMotor.set(0);
+    climbSubsystem.setTrolley(0);
   }
 }
