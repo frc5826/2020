@@ -24,6 +24,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private boolean shootMode = false;
   private boolean beamBroken = false;
 
+  private int counter = 0;
+
   public ShooterSubsystem() {
     shooterMotor.setInverted(true);
     intakeMotor.setInverted(true);
@@ -72,6 +74,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //TODO - Is the shooter up to speed to shoot
   public boolean isFastEnough() {
+    if(counter++ > 10) {
+      System.out.println(shooterMotor.getSensorCollection().toString());
+      System.out.println(shooterMotor.getSelectedSensorVelocity(kPIDLoopIdx));
+      counter = 0;
+    }
     return shooterMotor.getSelectedSensorVelocity(kPIDLoopIdx) > kShootRPM * .95;
   }
 
