@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -14,15 +15,12 @@ public class ClimbSubsystem extends SubsystemBase {
     private final DoubleSolenoid liftPiston = new DoubleSolenoid(pCompressor, psLiftFwd, psLiftRev);
 
     public ClimbSubsystem() {
+        trolleyMotor.configFactoryDefault();
+        trolleyMotor.setNeutralMode(NeutralMode.Brake);
+
         lowerLift();
         lowerTrolley();
     }
-
-    @Override
-    public void periodic() {
-        // This method will be called once per scheduler run
-    }
-
 
     public void lowerLift() {
         liftPiston.set(DoubleSolenoid.Value.kForward);
