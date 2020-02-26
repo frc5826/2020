@@ -9,18 +9,20 @@ public class PID {
     double error;
     private double output;
 
-    private double min_output = 0.4;
-    private double max_output = 0.7;
-
-    private double deadband = 1;
+    private double min_output = 0;
+    private double max_output = 1;
+    private double deadband = -1;
 
     private boolean min_hit = false;
     private boolean max_hit = false;
 
-    public PID(double P,double I,double D){
+    public PID(double P,double I,double D, double max, double min, double deadband){
         this.P = P;
         this.I = I;
         this.D = D;
+        this.max_output = max;
+        this.min_output = min;
+        this.deadband = deadband;
     }
 
     public void calculate(double actual) {
@@ -54,14 +56,21 @@ public class PID {
         }
     }
 
+    public double getError() {
+        return error;
+    }
+
     @Override
     public String toString() {
         return "PID{" +
                 "P=" + P +
                 ", I=" + I +
                 ", D=" + D +
-                ", output=" + output +
                 ", error=" + error +
+                ", output=" + output +
+                ", min_output=" + min_output +
+                ", max_output=" + max_output +
+                ", deadband=" + deadband +
                 ", min_hit=" + min_hit +
                 ", max_hit=" + max_hit +
                 '}';

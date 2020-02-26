@@ -81,7 +81,15 @@ public final class Constants {
 //    public static final double kLLHeightAngle = 12.6;
     public static final double kLLHeightAngle = 0;
     public static final double kTargetTurn = 0.5;
-    public static final double kTolerance = 0.35;
+
+    public static final double kTargetTurnTolerance = 1;
+    public static final double kTargetTurnMin = 0.4;
+    public static final double kTargetTurnMax = 0.7;
+
+    public static final double kTargetDriveTolerance = 0.5;
+    public static final double kTargetDriveMin = 0.5;
+    public static final double kTargetDriveMax = 1.0;
+
 
     //Shooter, Intake & Conveyor
     public static final double kIntakeSpeed = 1.0;
