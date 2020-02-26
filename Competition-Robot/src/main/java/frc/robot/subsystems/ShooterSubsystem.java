@@ -24,6 +24,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private boolean shootMode = false;
   private boolean beamBroken = false;
 
+  private int counter = 0;
+
   public ShooterSubsystem() {
     shooterMotor.setInverted(true);
     intakeMotor.setInverted(true);
@@ -72,9 +74,19 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.configClosedloopRamp(kRampRate);
   }
 
-  //TODO - Is the shooter up to speed to shoot
   public boolean isFastEnough() {
-    return shooterMotor.getSelectedSensorVelocity(kPIDLoopIdx) > kShootRPM * .95;
+    int sensorVelocity = shooterMotor.getSelectedSensorVelocity(kPIDLoopIdx);
+
+    // Note - getSelectedSensorVelocity returns 0 when encoder disconnected
+    // If getSelectedSensorVelocity returns 0 for 5?? loops then just return true
+    if(sensorVelocity == 0 && counter++ > 5){
+      return true;
+    } else if (sensorVelocity > 0){
+      // Only reset the counter if the sensor is working
+      counter = 0;
+    }
+
+    return sensorVelocity > kShootRPM * .95;
   }
 
   @Override
@@ -124,7 +136,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   //Min 0.0, Max = 1.0
   public double spinShoot(){
-    //TODO - What if you encoder gets unplugged?
     //100 is full speed
     //10 is RPM
     //8192 is count per full revolution
