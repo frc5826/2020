@@ -9,10 +9,10 @@ public class PID {
     double error;
     private double output;
 
-    private double min_output = 0.5;
-    private double max_output = 1.0;
+    private double min_output = 0.4;
+    private double max_output = 0.7;
 
-    private double deadband = .5;
+    private double deadband = 1;
 
     private boolean min_hit = false;
     private boolean max_hit = false;

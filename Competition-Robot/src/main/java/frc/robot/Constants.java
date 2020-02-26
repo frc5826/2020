@@ -70,9 +70,9 @@ public final class Constants {
 
     //Commands
     //Target
-    public static final double kTargetTurnP = 0.050;
-    public static final double kTargetTurnI = 0.0025;
-    public static final double kTargetTurnD = 0.0065;
+    public static final double kTargetTurnP = 0.035;
+    public static final double kTargetTurnI = 0.0;
+    public static final double kTargetTurnD = 0.0;
 
     public static final double kTargetDriveP = 0.07;
     public static final double kTargetDriveI = 0.0;
@@ -80,7 +80,7 @@ public final class Constants {
 
 //    public static final double kLLHeightAngle = 12.6;
     public static final double kLLHeightAngle = 0;
-    public static final double kTargetTurn = 0.6;
+    public static final double kTargetTurn = 0.5;
     public static final double kTolerance = 0.35;
 
     //Shooter, Intake & Conveyor
