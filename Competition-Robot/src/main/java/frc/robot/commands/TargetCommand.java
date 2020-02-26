@@ -39,12 +39,11 @@ public class TargetCommand extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-
-        pidTurn = new PID(kTargetTurnP,kTargetTurnI,kTargetTurnD);
-        pidDrive = new PID(SmartDashboard.getNumber("P",0.05),
-                SmartDashboard.getNumber("I", 0.0025), SmartDashboard.getNumber("D", 0.0065));
+        pidTurn = new PID(kTargetTurnP, kTargetTurnI, kTargetTurnD);
+        pidDrive = new PID(kTargetDriveP, kTargetDriveI, kTargetDriveD);
     }
     // Called every time the scheduler runs while the command is scheduled.
+
     @Override
     public void execute() {
         if(limelightSubsystem.isTargetVisable()){
@@ -52,7 +51,6 @@ public class TargetCommand extends CommandBase {
             pidDrive.setSetpoint(kLLHeightAngle);
             pidTurn.calculate(gyro.getAngle());
             pidDrive.calculate(limelightSubsystem.getHeightAngle());
-            System.out.println("rcw " + pidDrive.getOutput());
             driveSubsystem.getDiffDrive().arcadeDrive(pidDrive.getOutput(), pidTurn.getOutput());
             driveHWheel();
         }

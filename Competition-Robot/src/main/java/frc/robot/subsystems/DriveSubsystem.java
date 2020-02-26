@@ -21,6 +21,11 @@ public class DriveSubsystem extends SubsystemBase {
 
     public DriveSubsystem() {
         hwheel.setInverted(true);
+        rightMotor1.configOpenloopRamp(kRampRate);
+        rightMotor2.configOpenloopRamp(kRampRate);
+        leftMotor1.configOpenloopRamp(kRampRate);
+        leftMotor2.configOpenloopRamp(kRampRate);
+        hwheel.configOpenloopRamp(kRampRate);
         diffDrive.arcadeDrive(0,0);
     }
 

@@ -68,6 +68,8 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.config_kP(kPIDLoopIdx, kGains_Velocit.kP, kTimeoutMs);
     shooterMotor.config_kI(kPIDLoopIdx, kGains_Velocit.kI, kTimeoutMs);
     shooterMotor.config_kD(kPIDLoopIdx, kGains_Velocit.kD, kTimeoutMs);
+
+    shooterMotor.configClosedloopRamp(kRampRate);
   }
 
   //TODO - Is the shooter up to speed to shoot
@@ -128,6 +130,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //8192 is count per full revolution
     //600 is units per minute
     shooterMotor.set(ControlMode.Velocity, kShootRPM);
+   // shooterMotor.set(1);
     return getShooterCurrent();
   }
 
