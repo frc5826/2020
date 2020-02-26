@@ -119,7 +119,6 @@ public class ShooterSubsystem extends SubsystemBase {
     //600 is units per minute
     shooterMotor.set(ControlMode.Velocity, kShootRPM);
    // shooterMotor.set(1);
-    System.out.println(shooterMotor.getSelectedSensorVelocity(kPIDLoopIdx));
     return getShooterCurrent();
   }
 
