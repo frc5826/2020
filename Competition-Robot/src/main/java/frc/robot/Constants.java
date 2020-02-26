@@ -78,17 +78,19 @@ public final class Constants {
     public static final double kTargetDriveI = 0.0;
     public static final double kTargetDriveD = 0.03;
 
-    public static final double kLLHeightAngle = 12.6;
+//    public static final double kLLHeightAngle = 12.6;
+    public static final double kLLHeightAngle = 0;
     public static final double kTargetTurn = 0.6;
     public static final double kTolerance = 0.35;
 
     //Shooter, Intake & Conveyor
     public static final double kIntakeSpeed = 1.0;
     public static final double kShootSpeed = 1.0;
-    public static final double kShootRPM = 60000.0;
+    public static final double kShootRPM = 52000.0;
     public static final double kInputDelay = 10;
     public static final double kConSpeed = 0.5;
     public static final double kTrolley = .2;
+    public static final double kShootRPMThreshold = .05;
 
     //Talon speed control
     public static final int kSlotIdx = 0;

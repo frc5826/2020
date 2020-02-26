@@ -63,7 +63,7 @@ public class ShooterSubsystem extends SubsystemBase {
       counter = 0;
     }
 
-    return sensorVelocity > kShootRPM * .95;
+    return Math.abs((kShootRPM - sensorVelocity) /  kShootRPM) < kShootRPMThreshold;
   }
 
   @Override
