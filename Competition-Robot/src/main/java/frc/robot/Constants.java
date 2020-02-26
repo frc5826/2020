@@ -70,13 +70,13 @@ public final class Constants {
 
     //Commands
     //Target
-    public static final double kTargetTurnP = 0.010;
-    public static final double kTargetTurnI = 0.00;
-    public static final double kTargetTurnD = 0.005;
+    public static final double kTargetTurnP = 0.050;
+    public static final double kTargetTurnI = 0.0025;
+    public static final double kTargetTurnD = 0.0065;
 
-    public static final double kTargetDriveP = 0.09;
+    public static final double kTargetDriveP = 0.2;
     public static final double kTargetDriveI = 0.0;
-    public static final double kTargetDriveD = 0.0185;
+    public static final double kTargetDriveD = 0.03;
 
     public static final double kLLHeightAngle = 12.6;
     public static final double kTargetTurn = 0.6;
