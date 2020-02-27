@@ -27,6 +27,10 @@ public class ShooterSubsystem extends SubsystemBase {
   private int counter = 0;
 
   public ShooterSubsystem() {
+    shooterMotor.configFactoryDefault();
+    intakeMotor.configFactoryDefault();
+    conveyorMotor.configFactoryDefault();
+
     shooterMotor.setInverted(true);
     intakeMotor.setInverted(true);
     conveyorMotor.setInverted(true);
@@ -34,36 +38,9 @@ public class ShooterSubsystem extends SubsystemBase {
     //TODO - Is it better to add explicit limits or to disable completely
     shooterMotor.enableCurrentLimit(false);
 
-    /*
-    CIM specs
-    https://www.vexrobotics.com/217-2000.html#Docs_&_Downloads
-
-    Breaker specs
-    https://tinyurl.com/t4o23zu
-
-    Good docs on how limiting works
-    https://phoenix-documentation.readthedocs.io/en/latest/ch13_MC.html
-     */
-
-    //CIM stall @ 133A
-    //133A/40A -> 332.5% ~> 400% overload -> 0.3 - 0.6 trip
-    //Rounding amps and time down to be safe
-    shooterMotor.configPeakCurrentDuration(300);
-    shooterMotor.configPeakCurrentLimit(130);
-
-    //Shouldn't trip at 100%
-    shooterMotor.configContinuousCurrentLimit(kMaxAmps);
-
-    shooterMotor.configFactoryDefault();
     shooterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,
             kPIDLoopIdx,
             kTimeoutMs);
-
-
-    shooterMotor.configNominalOutputForward(0, kTimeoutMs);
-    shooterMotor.configNominalOutputReverse(0, kTimeoutMs);
-    shooterMotor.configPeakOutputForward(1, kTimeoutMs);
-    shooterMotor.configPeakOutputReverse(-1, kTimeoutMs);
 
     /* Config the Velocity closed loop gains in slot0 */
     shooterMotor.config_kF(kPIDLoopIdx, kGains_Velocit.kF, kTimeoutMs);
@@ -86,7 +63,7 @@ public class ShooterSubsystem extends SubsystemBase {
       counter = 0;
     }
 
-    return sensorVelocity > kShootRPM * .95;
+    return Math.abs((kShootRPM - sensorVelocity) /  kShootRPM) < kShootRPMThreshold;
   }
 
   @Override

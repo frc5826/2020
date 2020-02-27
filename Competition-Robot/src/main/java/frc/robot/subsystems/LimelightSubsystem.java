@@ -26,11 +26,6 @@ public class LimelightSubsystem extends SubsystemBase {
     pipeline.forceSetDouble(7);
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
   public double getTargetDistance(){
 
     NetworkTableEntry tz = table.getEntry("tz");

@@ -11,11 +11,6 @@ public class HWheelSubsystem extends SubsystemBase {
         lowerHWheel();
     }
 
-    @Override
-    public void periodic() {
-        // This method will be called once per scheduler run
-    }
-
     public void raiseHWheel() {
         wheeLift.set(DoubleSolenoid.Value.kReverse);
     }

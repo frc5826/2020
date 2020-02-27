@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveSubsystem;
@@ -39,11 +38,12 @@ public class TargetCommand extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        pidTurn = new PID(kTargetTurnP, kTargetTurnI, kTargetTurnD);
-        pidDrive = new PID(kTargetDriveP, kTargetDriveI, kTargetDriveD);
+        pidTurn = new PID(kTargetTurnP, kTargetTurnI, kTargetTurnD, kTargetTurnMax, kTargetTurnMin, kTargetTurnTolerance);
+        pidDrive = new PID(kTargetDriveP, kTargetDriveI, kTargetDriveD, kTargetDriveMax, kTargetDriveMin, kTargetDriveTolerance);
     }
     // Called every time the scheduler runs while the command is scheduled.
 
+    int i = 0;
     @Override
     public void execute() {
         if(limelightSubsystem.isTargetVisable()){
@@ -71,8 +71,8 @@ public class TargetCommand extends CommandBase {
 
     //TODO - Implement when the robot is in a good spot to shoot
     public boolean isTargetAcquired() {
-        if (Math.abs(pidDrive.getOutput()) < kTolerance &&
-                Math.abs(pidTurn.getOutput()) < kTolerance &&
+        if (Math.abs(pidDrive.getError()) < kTargetDriveTolerance &&
+                Math.abs(pidTurn.getError()) < kTargetTurnTolerance &&
                 limelightSubsystem.isTargetVisable()) {
             return true;
         } else {
