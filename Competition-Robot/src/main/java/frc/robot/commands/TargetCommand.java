@@ -39,7 +39,7 @@ public class TargetCommand extends CommandBase {
     @Override
     public void initialize() {
         pidTurn = new PID(kTargetTurnP, kTargetTurnI, kTargetTurnD, kTargetTurnMax, kTargetTurnMin, kTargetTurnTolerance);
-        pidDrive = new PID(kTargetDriveP, kTargetDriveI, kTargetDriveI, kTargetDriveMax, kTargetDriveMin, kTargetDriveTolerance);
+        pidDrive = new PID(kTargetDriveP, kTargetDriveI, kTargetDriveD, kTargetDriveMax, kTargetDriveMin, kTargetDriveTolerance);
     }
     // Called every time the scheduler runs while the command is scheduled.
 
