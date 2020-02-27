@@ -13,9 +13,6 @@ public class PID {
     private double max_output = 1;
     private double deadband = -1;
 
-    private boolean min_hit = false;
-    private boolean max_hit = false;
-
     public PID(double P,double I,double D, double max, double min, double deadband){
         this.P = P;
         this.I = I;
@@ -42,16 +39,12 @@ public class PID {
             return 0;
         }
         else if(Math.abs(output) > max_output){
-            max_hit = true;
             return output > 0 ? max_output : -max_output;
         }
         else if(Math.abs(output) < min_output){
-            min_hit = true;
             return output > 0 ? min_output : -min_output;
         }
         else {
-            min_hit = false;
-            max_hit = false;
             return output;
         }
     }
@@ -71,8 +64,6 @@ public class PID {
                 ", min_output=" + min_output +
                 ", max_output=" + max_output +
                 ", deadband=" + deadband +
-                ", min_hit=" + min_hit +
-                ", max_hit=" + max_hit +
                 '}';
     }
 }
