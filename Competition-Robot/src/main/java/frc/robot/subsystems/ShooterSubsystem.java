@@ -43,10 +43,10 @@ public class ShooterSubsystem extends SubsystemBase {
             kTimeoutMs);
 
     /* Config the Velocity closed loop gains in slot0 */
-    shooterMotor.config_kF(kPIDLoopIdx, kGains_Velocit.kF, kTimeoutMs);
-    shooterMotor.config_kP(kPIDLoopIdx, kGains_Velocit.kP, kTimeoutMs);
-    shooterMotor.config_kI(kPIDLoopIdx, kGains_Velocit.kI, kTimeoutMs);
-    shooterMotor.config_kD(kPIDLoopIdx, kGains_Velocit.kD, kTimeoutMs);
+    shooterMotor.config_kF(kPIDLoopIdx, 0, kTimeoutMs);
+    shooterMotor.config_kP(kPIDLoopIdx, kShooterP, kTimeoutMs);
+    shooterMotor.config_kI(kPIDLoopIdx, kShooterI, kTimeoutMs);
+    shooterMotor.config_kD(kPIDLoopIdx, kShooterD, kTimeoutMs);
 
     shooterMotor.configClosedloopRamp(kRampRate);
   }

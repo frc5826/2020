@@ -94,11 +94,15 @@ public final class Constants {
     //Shooter, Intake & Conveyor
     public static final double kIntakeSpeed = 1.0;
     public static final double kShootSpeed = 1.0;
-    public static final double kShootRPM = 52000.0;
+    public static final double kShootRPM = 54000.0;
     public static final double kInputDelay = 10;
     public static final double kConSpeed = 0.5;
     public static final double kTrolley = .2;
     public static final double kShootRPMThreshold = .05;
+
+    public static final double kShooterP = 0.25;
+    public static final double kShooterI = .001;
+    public static final double kShooterD = 20;
 
     //Talon speed control
     public static final int kSlotIdx = 0;
@@ -118,31 +122,6 @@ public final class Constants {
      */
     public static final int kTimeoutMs = 30;
 
-    /**
-     * PID Gains may have to be adjusted based on the responsiveness of control loop.
-     * kF: 1023 represents output value to Talon at 100%, 7200 represents Velocity units at 100% output
-     *
-     * 	                                    			  kP   kI   kD   kF          Iz    PeakOut */
-    public final static Gains kGains_Velocit = new Gains( 0.25, 0.001, 20, 1023.0/7200.0,  300,  1.00);
-
-
-    public static class Gains {
-        public final double kP;
-        public final double kI;
-        public final double kD;
-        public final double kF;
-        public final int kIzone;
-        public final double kPeakOutput;
-
-        public Gains(double _kP, double _kI, double _kD, double _kF, int _kIzone, double _kPeakOutput){
-            kP = _kP;
-            kI = _kI;
-            kD = _kD;
-            kF = _kF;
-            kIzone = _kIzone;
-            kPeakOutput = _kPeakOutput;
-        }
-    }
     //Limit the value to the abs(max)
     public static double limitSpeed(double value, double max){
         double normedMax = Math.abs(max);

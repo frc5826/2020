@@ -7,9 +7,17 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.MjpegServer;
+import edu.wpi.cscore.UsbCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -30,8 +38,18 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    UsbCamera cam0 = new UsbCamera("cam0", 0);
+    MjpegServer mjpegServer0 = new MjpegServer("cam0serve", 1181);
+    mjpegServer0.setSource(cam0);
+    CvSink cvSink = new CvSink("opencvUSB Cam0");
+    cvSink.setSource(cam0);
+    CvSource outputStream = new CvSource("Blur", VideoMode.PixelFormat.kBGR.kMJPEG, 640, 480, 30);
+    MjpegServer mjpegServer1 = new MjpegServer("serve_Blur", 1182);
+    mjpegServer1.setSource(outputStream);
+
     robot_container = new RobotContainer();
     CommandScheduler.getInstance().setDefaultCommand(robot_container.getDriveSubsystem(), robot_container.getJoystickDrive());
+
   }
 
   /**

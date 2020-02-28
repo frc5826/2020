@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import static frc.robot.Constants.*;
@@ -45,6 +46,7 @@ public class DriveSubsystem extends SubsystemBase {
         diffDrive = new DifferentialDrive(leftSpeedControllers, rightSpeedControllers);
 
         diffDrive.arcadeDrive(0,0);
+
     }
 
     public DifferentialDrive getDiffDrive(){

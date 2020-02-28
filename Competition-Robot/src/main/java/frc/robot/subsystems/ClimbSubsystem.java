@@ -17,6 +17,7 @@ public class ClimbSubsystem extends SubsystemBase {
     public ClimbSubsystem() {
         trolleyMotor.configFactoryDefault();
         trolleyMotor.setNeutralMode(NeutralMode.Brake);
+        trolleyMotor.setInverted(true);
 
         lowerLift();
         lowerTrolley();
