@@ -57,6 +57,7 @@ public class ShooterSubsystem extends SubsystemBase {
     // Note - getSelectedSensorVelocity returns 0 when encoder disconnected
     // If getSelectedSensorVelocity returns 0 for 5?? loops then just return true
     if(sensorVelocity == 0 && counter++ > 5){
+      System.out.println("isFastEnough returned True early.");
       return true;
     } else if (sensorVelocity > 0){
       // Only reset the counter if the sensor is working
