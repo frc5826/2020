@@ -47,8 +47,8 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.config_kP(kPIDLoopIdx, kShooterP, kTimeoutMs);
     shooterMotor.config_kI(kPIDLoopIdx, kShooterI, kTimeoutMs);
     shooterMotor.config_kD(kPIDLoopIdx, kShooterD, kTimeoutMs);
-    shooterMotor.configPeakOutputForward(.85, kTimeoutMs);
-    shooterMotor.configPeakOutputReverse(-.85, kTimeoutMs);
+    shooterMotor.configPeakOutputForward(kShooterPeakOutput, kTimeoutMs);
+    shooterMotor.configPeakOutputReverse(-kShooterPeakOutput, kTimeoutMs);
     shooterMotor.configClosedloopRamp(kRampRate);
   }
 
