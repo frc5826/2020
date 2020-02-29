@@ -47,7 +47,8 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.config_kP(kPIDLoopIdx, kShooterP, kTimeoutMs);
     shooterMotor.config_kI(kPIDLoopIdx, kShooterI, kTimeoutMs);
     shooterMotor.config_kD(kPIDLoopIdx, kShooterD, kTimeoutMs);
-
+    shooterMotor.configPeakOutputForward(.85, kTimeoutMs);
+    shooterMotor.configPeakOutputReverse(-.85, kTimeoutMs);
     shooterMotor.configClosedloopRamp(kRampRate);
   }
 
@@ -57,7 +58,6 @@ public class ShooterSubsystem extends SubsystemBase {
     // Note - getSelectedSensorVelocity returns 0 when encoder disconnected
     // If getSelectedSensorVelocity returns 0 for 5?? loops then just return true
     if(sensorVelocity == 0 && counter++ > 5){
-      System.out.println("isFastEnough returned True early.");
       return true;
     } else if (sensorVelocity > 0){
       // Only reset the counter if the sensor is working
