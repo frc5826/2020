@@ -103,6 +103,7 @@ public final class Constants {
     public static final double kShooterP = 0.25;
     public static final double kShooterI = .001;
     public static final double kShooterD = 20;
+    public static final double kShooterPeakOutput = 0.85;
 
     //Talon speed control
     public static final int kSlotIdx = 0;
