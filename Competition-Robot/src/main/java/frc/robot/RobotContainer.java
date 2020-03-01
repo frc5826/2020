@@ -15,6 +15,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import static frc.robot.Constants.*;
+import frc.robot.Camera;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -29,6 +30,8 @@ public class RobotContainer {
   private final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final HWheelSubsystem hWheelSubsystem = new HWheelSubsystem();
+  private final Dashboard dashboardSubsystem = new Dashboard(hWheelSubsystem,limelightSubsystem);
+  private final Camera cam0 = new Camera();
 
   private final JoystickDriveCommand driveCommand = new JoystickDriveCommand(driveSubsystem);
 
@@ -38,6 +41,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    cam0.initialize();
   }
 
   /**
@@ -54,6 +58,8 @@ public class RobotContainer {
     bBalanceLeft.createButton().whenHeld(new TrolleyLeftCommand(climbSubsystem));
     bBalanceRight.createButton().whenHeld(new TrolleyRightCommand(climbSubsystem));
     bIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
+    bxIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
+    bxReverseIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
     bShoot.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
     bRaiseHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
     bLowerHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));

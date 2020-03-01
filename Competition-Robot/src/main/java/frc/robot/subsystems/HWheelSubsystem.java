@@ -11,9 +11,6 @@ public class HWheelSubsystem extends SubsystemBase {
     public HWheelSubsystem() {
         lowerHWheel();
     }
-    public void periodic(){
-        SmartDashboard.putBoolean("hwheel", isHwheelDown());
-    }
     public boolean isHwheelDown(){
         if(wheeLift.get() == DoubleSolenoid.Value.kForward){
             return true;

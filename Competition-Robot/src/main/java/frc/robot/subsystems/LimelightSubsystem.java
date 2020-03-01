@@ -25,7 +25,10 @@ public class LimelightSubsystem extends SubsystemBase {
     NetworkTableEntry pipeline = table.getEntry("pipeline");
     pipeline.forceSetDouble(7);
   }
-
+  public void setGreenLight(boolean light) {
+    NetworkTableEntry tled = table.getEntry("ledMode");
+    tled.setDouble(light ? 0 : 1);
+  }
   public double getTargetDistance(){
 
     NetworkTableEntry tz = table.getEntry("tz");
@@ -41,6 +44,10 @@ public class LimelightSubsystem extends SubsystemBase {
 
     return x;
     
+  }
+  public void setPipeline(double value){
+    NetworkTableEntry pipeline = table.getEntry("pipeline");
+    pipeline.forceSetDouble(value);
   }
   public double getHeightAngle(){
       

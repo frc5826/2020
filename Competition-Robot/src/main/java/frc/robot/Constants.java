@@ -38,6 +38,10 @@ public final class Constants {
     public static final ButtonTuple bRaiseHWheel = new ButtonTuple(joystick, 12);//12
     public static final ButtonTuple bRaiseTrolley = new ButtonTuple(joystick, 8);//8 x
     public static final ButtonTuple bLowerTrolley = new ButtonTuple(joystick, 7);//7
+    //Xbox Buttons
+    public static final ButtonTuple bxIntake = new ButtonTuple(xbox, 3);
+    public static final ButtonTuple bxReverseIntake = new ButtonTuple(xbox, 1);
+
 
 
     //Speed Controllers
@@ -70,7 +74,7 @@ public final class Constants {
 
     //Commands
     //Target
-    public static final double kTargetTurnP = 0.035;
+    public static final double kTargetTurnP = 0.038;
     public static final double kTargetTurnI = 0.0;
     public static final double kTargetTurnD = 0.0;
 
@@ -79,7 +83,7 @@ public final class Constants {
     public static final double kTargetDriveD = 0.0;
 
 //    public static final double kLLHeightAngle = 12.6;
-    public static final double kLLHeightAngle = 0;
+    public static final double kLLHeightAngle = 11;
     public static final double kTargetTurn = 0.5;
 
     public static final double kTargetTurnTolerance = 1;
@@ -94,16 +98,16 @@ public final class Constants {
     //Shooter, Intake & Conveyor
     public static final double kIntakeSpeed = 1.0;
     public static final double kShootSpeed = 1.0;
-    public static final double kShootRPM = 54000.0;
+    public static final double kShootRPM = 56500.0;
     public static final double kInputDelay = 10;
     public static final double kConSpeed = 0.5;
     public static final double kTrolley = .2;
-    public static final double kShootRPMThreshold = .05;
+    public static final double kShootRPMThreshold = .10;
+    public static final double kShooterPeakOutput = 0.90;
 
     public static final double kShooterP = 0.25;
     public static final double kShooterI = .001;
     public static final double kShooterD = 20;
-    public static final double kShooterPeakOutput = 0.85;
 
     //Talon speed control
     public static final int kSlotIdx = 0;
