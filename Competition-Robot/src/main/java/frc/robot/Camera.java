@@ -15,7 +15,7 @@ public class Camera {
         //   forwardCam.setResolution(640,480);
         camera1 = CameraServer.getInstance().startAutomaticCapture(0);
         camera1.setResolution(640,480);
-        camera1.setBrightness(0);
+        camera1.setBrightness(10);
         camera1.setFPS(30);
 
 

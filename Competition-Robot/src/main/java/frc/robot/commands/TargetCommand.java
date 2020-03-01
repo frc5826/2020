@@ -16,7 +16,7 @@ import static frc.robot.Constants.*;
 public class TargetCommand extends CommandBase {
 
     protected final DriveSubsystem driveSubsystem;
-    private final LimelightSubsystem limelightSubsystem;
+    protected final LimelightSubsystem limelightSubsystem;
     private final ShooterSubsystem shooterSubsystem;
     private PID pidTurn;
     private PID pidDrive;
@@ -67,7 +67,7 @@ public class TargetCommand extends CommandBase {
 
     //Method to override in the auto version of this command
     public void driveHWheel() {
-        driveSubsystem.driveHWheel(Constants.joystick.getX() * -1);
+        driveSubsystem.driveHWheel(Constants.joystick.getX());
     }
 
     //TODO - Implement when the robot is in a good spot to shoot
