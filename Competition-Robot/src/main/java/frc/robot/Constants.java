@@ -101,7 +101,7 @@ public final class Constants {
     public static final double kShootRPM = 57000.0;
     public static final double kInputDelay = 10;
     public static final double kConSpeed = 0.5;
-    public static final double kTrolley = .2;
+    public static final double kTrolley = .5;
     public static final double kShootRPMThreshold = .1;
     public static final double kShooterPeakOutput = 0.85;
 
