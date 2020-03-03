@@ -58,8 +58,8 @@ public class RobotContainer {
     bBalanceLeft.createButton().whenHeld(new TrolleyLeftCommand(climbSubsystem));
     bBalanceRight.createButton().whenHeld(new TrolleyRightCommand(climbSubsystem));
     bIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
-    bxIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
-    bxReverseIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
+    //bxIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
+    //bxReverseIntake.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new IntakeCommand(shooterSubsystem)));
     bShoot.createButton().whenHeld(new DriveCommandGroup(driveSubsystem, new ShooterCommand(shooterSubsystem)));
     bRaiseHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelRaiseCommand(hWheelSubsystem)));
     bLowerHWheel.createButton().whenPressed(new DriveCommandGroup(driveSubsystem, new HwheelLowerCommand(hWheelSubsystem)));

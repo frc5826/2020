@@ -4,6 +4,8 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
+import static frc.robot.Constants.*;
+
 public class AutoCommand extends TargetCommand {
     protected boolean isBackingup = true;
 
@@ -13,8 +15,8 @@ public class AutoCommand extends TargetCommand {
 
     @Override
     public void execute(){
-        if (isBackingup && limelightSubsystem.getHeightAngle() > 1){
-            driveSubsystem.getDiffDrive().arcadeDrive(-0.7,0);
+        if (isBackingup && limelightSubsystem.getHeightAngle() > kBackupAngle && limelightSubsystem.isTargetVisable()){
+            driveSubsystem.getDiffDrive().arcadeDrive(kBackupSpeed,0);
         } else{
             super.execute();
             isBackingup = false;

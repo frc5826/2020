@@ -72,11 +72,13 @@ public class ShooterSubsystem extends SubsystemBase {
     pov = joystick.getPOV(0);
 
     //Dpad top three points
-    if (pov == 45 || pov == 0 || pov == 315 || xbox.getYButtonPressed()) {
+    //if (pov == 45 || pov == 0 || pov == 315 || xbox.getYButtonPressed()) {
+    if (pov == 45 || pov == 0 || pov == 315) {
       conveyorMotor.set(kConSpeed);
     }
     //Dpad bottom three points
-    else if (pov == 180 || pov == 135 || pov == 225 || xbox.getBButtonPressed()) {
+    //else if (pov == 180 || pov == 135 || pov == 225 || xbox.getBButtonPressed()) {
+    else if (pov == 180 || pov == 135 || pov == 225) {
       conveyorMotor.set(-kConSpeed);
     }
     else if(!shootMode) {

@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.SPI;
 public final class Constants {
 
     public static Joystick joystick = new Joystick(0);
-    public static XboxController xbox = new XboxController(1);
+    //public static XboxController xbox = new XboxController(1);
     public static AHRS gyro = new AHRS(SPI.Port.kMXP);
 
     //Buttons
@@ -39,8 +39,8 @@ public final class Constants {
     public static final ButtonTuple bRaiseTrolley = new ButtonTuple(joystick, 8);//8 x
     public static final ButtonTuple bLowerTrolley = new ButtonTuple(joystick, 7);//7
     //Xbox Buttons
-    public static final ButtonTuple bxIntake = new ButtonTuple(xbox, 3);
-    public static final ButtonTuple bxReverseIntake = new ButtonTuple(xbox, 1);
+    //public static final ButtonTuple bxIntake = new ButtonTuple(xbox, 3);
+    //public static final ButtonTuple bxReverseIntake = new ButtonTuple(xbox, 1);
 
 
 
@@ -83,7 +83,9 @@ public final class Constants {
     public static final double kTargetDriveD = 0.0;
 
 //    public static final double kLLHeightAngle = 12.6;
-    public static final double kLLHeightAngle = 11;
+    public static final double kLLHeightAngle = 16.5;
+    public static final double kBackupAngle = 1;
+    public static final double kBackupSpeed = -.7;
     public static final double kTargetTurn = 0.5;
 
     public static final double kTargetTurnTolerance = 1;
