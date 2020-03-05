@@ -84,8 +84,8 @@ public final class Constants {
 
 //    public static final double kLLHeightAngle = 12.6;
     public static final double kLLHeightAngle = 16.5;
-    public static final double kBackupAngle = 1;
-    public static final double kBackupSpeed = -.7;
+    public static final double kBackupAngle = 3;
+    public static final double kBackupSpeed = -0.7;
     public static final double kTargetTurn = 0.5;
 
     public static final double kTargetTurnTolerance = 1;
@@ -100,22 +100,22 @@ public final class Constants {
     //Shooter, Intake & Conveyor
     public static final double kIntakeSpeed = 1.0;
     public static final double kShootSpeed = 1.0;
-    public static final double kShootRPM = 57000.0;
+    public static final double kShootRPM = 58000.0;
     public static final double kInputDelay = 10;
     public static final double kConSpeed = 0.5;
-    public static final double kTrolley = .5;
-    public static final double kShootRPMThreshold = .1;
+    public static final double kTrolley = 0.5;
+    public static final double kShootRPMThreshold = 0.1;
     public static final double kShooterPeakOutput = 0.85;
 
     public static final double kShooterP = 0.25;
-    public static final double kShooterI = .001;
+    public static final double kShooterI = 0.001;
     public static final double kShooterD = 20;
 
     //Talon speed control
     public static final int kSlotIdx = 0;
 
     //Ramp Rate
-    public static final double kRampRate = .3;
+    public static final double kRampRate = 0.3;
 
     /**
      * Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops. For
