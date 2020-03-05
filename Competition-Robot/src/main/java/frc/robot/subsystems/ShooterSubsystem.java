@@ -9,9 +9,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import static frc.robot.Constants.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.motorcontrol.*;
+import frc.robot.subsystems.Dashboard;
 
 
 public class ShooterSubsystem extends SubsystemBase {
+  protected final Dashboard dashboard;
   private DigitalInput beamBreakSensor = new DigitalInput(diBeamBreak);
 
   private final WPI_TalonSRX shooterMotor = new WPI_TalonSRX(scShooter);
@@ -26,7 +28,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   private int counter = 0;
 
-  public ShooterSubsystem() {
+  public ShooterSubsystem(Dashboard dashboard) {
+    this.dashboard = dashboard;
     shooterMotor.configFactoryDefault();
     intakeMotor.configFactoryDefault();
     conveyorMotor.configFactoryDefault();
@@ -64,7 +67,7 @@ public class ShooterSubsystem extends SubsystemBase {
       counter = 0;
     }
 
-    return Math.abs((kShootRPM - sensorVelocity) /  kShootRPM) < kShootRPMThreshold;
+    return Math.abs((dashboard.getShootRPM() - sensorVelocity) /  dashboard.getShootRPM()) < kShootRPMThreshold;
   }
 
   @Override
@@ -120,7 +123,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //10 is RPM
     //8192 is count per full revolution
     //600 is units per minute
-    shooterMotor.set(ControlMode.Velocity, kShootRPM);
+    shooterMotor.set(ControlMode.Velocity, dashboard.getShootRPM());
    // shooterMotor.set(1);
     return getShooterCurrent();
   }

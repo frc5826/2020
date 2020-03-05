@@ -6,6 +6,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.Dashboard;
 import frc.robot.PID;
 
 import static frc.robot.Constants.*;
@@ -17,6 +18,7 @@ public class TargetCommand extends CommandBase {
 
     protected final DriveSubsystem driveSubsystem;
     protected final LimelightSubsystem limelightSubsystem;
+    protected final Dashboard dashboardSubsystem;
     private final ShooterSubsystem shooterSubsystem;
     private PID pidTurn;
     private PID pidDrive;
@@ -28,11 +30,12 @@ public class TargetCommand extends CommandBase {
     int setpoint = Integer.MAX_VALUE;
     double error;
 
-    public TargetCommand(DriveSubsystem driveSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shoot){
+    public TargetCommand(DriveSubsystem driveSubsystem, LimelightSubsystem limelightSubsystem, ShooterSubsystem shoot, Dashboard dashboardSubsystem){
         this.shooterSubsystem = shoot;
         this.driveSubsystem = driveSubsystem;
         this.limelightSubsystem = limelightSubsystem;
-        addRequirements(driveSubsystem, limelightSubsystem);
+        this.dashboardSubsystem = dashboardSubsystem;
+        addRequirements(driveSubsystem, limelightSubsystem, dashboardSubsystem);
     }
 
     // Called when the command is initially scheduled.
@@ -49,7 +52,7 @@ public class TargetCommand extends CommandBase {
     public void execute() {
         if(limelightSubsystem.isTargetVisable()){
             pidTurn.setSetpoint(Constants.gyro.getAngle() + limelightSubsystem.getTargetAngleOffset());
-            pidDrive.setSetpoint(kLLHeightAngle);
+            pidDrive.setSetpoint(dashboardSubsystem.getHeightAngle());
             pidTurn.calculate(gyro.getAngle());
             pidDrive.calculate(limelightSubsystem.getHeightAngle());
             driveSubsystem.getDiffDrive().arcadeDrive(pidDrive.getOutput(), pidTurn.getOutput());

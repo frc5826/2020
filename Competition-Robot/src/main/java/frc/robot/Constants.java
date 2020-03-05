@@ -84,7 +84,7 @@ public final class Constants {
 
 //    public static final double kLLHeightAngle = 12.6;
     public static final double kLLHeightAngle = 16.5;
-    public static final double kBackupAngle = 3;
+    public static final double kBackupAngle = 4;
     public static final double kBackupSpeed = -0.7;
     public static final double kTargetTurn = 0.5;
 

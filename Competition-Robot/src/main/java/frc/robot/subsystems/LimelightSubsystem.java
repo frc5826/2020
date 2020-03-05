@@ -17,7 +17,6 @@ public class LimelightSubsystem extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
-
   private NetworkTable table;
 
   public LimelightSubsystem() {
