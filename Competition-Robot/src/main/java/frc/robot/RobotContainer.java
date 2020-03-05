@@ -25,12 +25,12 @@ import frc.robot.Camera;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  private final HWheelSubsystem hWheelSubsystem = new HWheelSubsystem();
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
-  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  private final HWheelSubsystem hWheelSubsystem = new HWheelSubsystem();
   private final Dashboard dashboardSubsystem = new Dashboard(hWheelSubsystem,limelightSubsystem);
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(dashboardSubsystem);
   private final Camera cam0 = new Camera();
 
   private final JoystickDriveCommand driveCommand = new JoystickDriveCommand(driveSubsystem);
@@ -51,7 +51,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    TargetCommand tc = new TargetCommand(driveSubsystem, limelightSubsystem, shooterSubsystem);
+    TargetCommand tc = new TargetCommand(driveSubsystem, limelightSubsystem, shooterSubsystem, dashboardSubsystem);
     bTarget.createButton().whenHeld(new ParallelCommandGroup(tc, new ShooterCommand(shooterSubsystem, () -> tc.isTargetAcquired())));
 
     bBalanceAuto.createButton().whenHeld(new TrolleyBalanceCommand(climbSubsystem));
@@ -76,7 +76,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    AutoCommand tc = new AutoCommand(driveSubsystem, limelightSubsystem, shooterSubsystem);
+    AutoCommand tc = new AutoCommand(driveSubsystem, limelightSubsystem, shooterSubsystem, dashboardSubsystem);
     return new ParallelCommandGroup(tc, new ShooterCommand(shooterSubsystem, () -> tc.isTargetAcquired()));
   }
 
