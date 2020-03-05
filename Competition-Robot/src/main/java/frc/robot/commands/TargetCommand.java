@@ -43,7 +43,7 @@ public class TargetCommand extends CommandBase {
     public void initialize() {
         pidTurn = new PID(kTargetTurnP, kTargetTurnI, kTargetTurnD, kTargetTurnMax, kTargetTurnMin, kTargetTurnTolerance);
         pidDrive = new PID(kTargetDriveP, kTargetDriveI, kTargetDriveD, kTargetDriveMax, kTargetDriveMin, kTargetDriveTolerance);
-        limelightSubsystem.setPipeline(7);
+        limelightSubsystem.setPipeline(0);
     }
     // Called every time the scheduler runs while the command is scheduled.
 

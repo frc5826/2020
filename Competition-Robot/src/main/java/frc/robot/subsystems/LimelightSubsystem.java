@@ -22,7 +22,7 @@ public class LimelightSubsystem extends SubsystemBase {
   public LimelightSubsystem() {
     table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry pipeline = table.getEntry("pipeline");
-    pipeline.forceSetDouble(7);
+    pipeline.forceSetDouble(0);
   }
   public void setGreenLight(boolean light) {
     NetworkTableEntry tled = table.getEntry("ledMode");
