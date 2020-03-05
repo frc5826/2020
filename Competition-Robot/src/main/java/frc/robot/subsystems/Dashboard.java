@@ -19,6 +19,7 @@ public class Dashboard extends SubsystemBase {
       SmartDashboard.putNumber("Backup Angle", kBackupAngle);
       SmartDashboard.putNumber("HeightAngle", kLLHeightAngle);
       SmartDashboard.putNumber("RPMs", kShootRPM);
+      SmartDashboard.putNumber("Limelight", limelightSubsystem.getPipeline());
     }
     public double getBackupAngle(){
         return SmartDashboard.getNumber("Backup Angle", kBackupAngle);

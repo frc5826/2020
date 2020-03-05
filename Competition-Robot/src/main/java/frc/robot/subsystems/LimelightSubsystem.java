@@ -35,7 +35,11 @@ public class LimelightSubsystem extends SubsystemBase {
     
     return z;
   }
+  public double getPipeline(){
+    NetworkTableEntry pipeline = table.getEntry("pipeline");
+    return pipeline.getDouble(-1);
 
+  }
   public double getTargetAngleOffset(){
 
     NetworkTableEntry tx = table.getEntry("tx");
