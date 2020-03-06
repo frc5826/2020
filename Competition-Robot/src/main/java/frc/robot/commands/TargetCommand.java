@@ -44,6 +44,7 @@ public class TargetCommand extends CommandBase {
         pidTurn = new PID(kTargetTurnP, kTargetTurnI, kTargetTurnD, kTargetTurnMax, kTargetTurnMin, kTargetTurnTolerance);
         pidDrive = new PID(kTargetDriveP, kTargetDriveI, kTargetDriveD, kTargetDriveMax, kTargetDriveMin, kTargetDriveTolerance);
         limelightSubsystem.setPipeline(7);
+        limelightSubsystem.setGreenLight(true);
     }
     // Called every time the scheduler runs while the command is scheduled.
 
@@ -66,6 +67,7 @@ public class TargetCommand extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        limelightSubsystem.setGreenLight(false);
     }
 
     //Method to override in the auto version of this command
