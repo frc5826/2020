@@ -16,9 +16,6 @@ public class Dashboard extends SubsystemBase {
     @Override
     public void periodic() {
       SmartDashboard.putBoolean("hwheel", hwheelSubsystem.isHwheelDown());
-      SmartDashboard.putNumber("Backup Angle", kBackupAngle);
-      SmartDashboard.putNumber("HeightAngle", kLLHeightAngle);
-      SmartDashboard.putNumber("RPMs", kShootRPM);
       SmartDashboard.putNumber("Limelight", limelightSubsystem.getPipeline());
     }
     public double getBackupAngle(){
