@@ -100,7 +100,7 @@ public final class Constants {
     //Shooter, Intake & Conveyor
     public static final double kIntakeSpeed = 1.0;
     public static final double kShootSpeed = 1.0;
-    public static final double kShootRPM = 60000.0;
+    public static final double kShootRPM = 58000.0;
     public static final double kInputDelay = 20;
     public static final double kConSpeed = 0.5;
     public static final double kTrolley = 0.5;
